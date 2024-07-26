@@ -24,9 +24,9 @@ openapi-generator generate \
     --additional-properties=licenseName=MIT \
     --additional-properties=licenseUrl=https://github.com/trivium-capital/trivium-java-sdk/blob/main/LICENSE \
     --additional-properties=modelPackage=tech.triviumcapital.clients.java.model \
-    --additional-properties=scmConnection=git@github.com:trivium-capital/trivium-java-sdk.git \
-    --additional-properties=scmDeveloperConnection=git@github.com:trivium-capital/trivium-java-sdk.git \
-    --additional-properties=scmUrl=https://github.com/trivium-capital/trivium-java-sdk \
+    --additional-properties=scmConnection=scm:git:git@github.com:trivium-capital/trivium-java-sdk.git \
+    --additional-properties=scmDeveloperConnection=scm:git:git@github.com:trivium-capital/trivium-java-sdk.git \
+    --additional-properties=scmUrl=scm:git:https://github.com/trivium-capital/trivium-java-sdk \
     --additional-properties=supportUrlQuery=false \
     --additional-properties=useOneOfInterfaces=true \
     --additional-properties=useRuntimeException=true
