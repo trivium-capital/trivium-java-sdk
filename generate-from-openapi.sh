@@ -1,0 +1,31 @@
+openapi-generator generate \
+    -i docs.yaml \
+    -g java \
+    -o . \
+    --additional-properties=library=apache-httpclient \
+    --additional-properties=dateLibrary=java8 \
+    --additional-properties=annotationLibrary=none \
+    --additional-properties=artifactId=trivium-java-sdk \
+    --additional-properties=apiPackage=tech.triviumcapital.clients.java.api \
+    --additional-properties=artifactDescription='Java SDK for Trivium API' \
+    --additional-properties=artifactUrl=https://github.com/trivium-capital/trivium-java-sdk \
+    --additional-properties=booleanGetterPrefix=is \
+    --additional-properties=developerEmail=william@triviumcapital.tech \
+    --additional-properties=developerName='William Haw' \
+    --additional-properties=developerOrganization=Trivium \
+    --additional-properties=developerOrganizationUrl=https://triviumcapital.tech \
+    --additional-properties=documentationProvider=none \
+    --additional-properties=enumUnknownDefaultCase=true \
+    --additional-properties=generateBuilders=true \
+    --additional-properties=generateConstructorWithAllArgs=true \
+    --additional-properties=groupId=tech.triviumcapital.clients \
+    --additional-properties=invokerPackage=tech.triviumcapital.clients.java \
+    --additional-properties=licenseName=MIT \
+    --additional-properties=licenseUrl=https://github.com/trivium-capital/trivium-java-sdk/blob/main/LICENSE \
+    --additional-properties=modelPackage=tech.triviumcapital.clients.java.model \
+    --additional-properties=scmConnection=git@github.com:trivium-capital/trivium-java-sdk.git \
+    --additional-properties=scmDeveloperConnection=git@github.com:trivium-capital/trivium-java-sdk.git \
+    --additional-properties=scmUrl=https://github.com/trivium-capital/trivium-java-sdk \
+    --additional-properties=supportUrlQuery=false \
+    --additional-properties=useOneOfInterfaces=true \
+    --additional-properties=useRuntimeException=true
