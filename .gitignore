@@ -19,3 +19,21 @@ hs_err_pid*
 target
 .gradle
 build
+
+# MacOS
+.DS_Store
+
+# Intellij
+out/
+.idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
+
+# VSCode
+.vscode/
+.code-workspace
+
+# Miscellaneous
+*.log
