@@ -9,8 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**quantity** | **BigDecimal** |  |  |
 |**currencyCode** | **String** |  |  |
-|**transferDetails** | [**TransferDetails**](TransferDetails.md) |  |  [optional] |
-|**transfer** | [**Transfer**](Transfer.md) |  |  [optional] |
+|**transfer** | [**Transfer**](Transfer.md) |  |  |
 
 
 

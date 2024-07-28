@@ -13,7 +13,6 @@
 |**status** | **AccountStatus** |  |  |
 |**provider** | [**ProviderDetails**](ProviderDetails.md) |  |  |
 |**earningsToDate** | [**EarningsToDate**](EarningsToDate.md) |  |  |
-|**localDepositInstructions** | [**LocalTransfer**](LocalTransfer.md) |  |  [optional] |
 |**depositInstructions** | [**DepositInstructions**](DepositInstructions.md) |  |  |
 
 

@@ -10,7 +10,7 @@ All URIs are relative to *http://localhost*
 
 ## getApiV1TransactionsUserid
 
-> PaginationResultUserTransaction getApiV1TransactionsUserid(userId, limit, offset)
+> PaginationResultUserTransaction getApiV1TransactionsUserid(userId, limit, offset, transactionId)
 
 
 
@@ -46,8 +46,9 @@ public class Example {
         UUID userId = UUID.fromString("e63b255b-8ece-458b-ba26-d8e77188857a"); // UUID | 
         Integer limit = 56; // Integer | 
         Integer offset = 56; // Integer | 
+        UUID transactionId = UUID.randomUUID(); // UUID | 
         try {
-            PaginationResultUserTransaction result = apiInstance.getApiV1TransactionsUserid(userId, limit, offset);
+            PaginationResultUserTransaction result = apiInstance.getApiV1TransactionsUserid(userId, limit, offset, transactionId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TransactionsApi#getApiV1TransactionsUserid");
@@ -68,6 +69,7 @@ public class Example {
 | **userId** | **UUID**|  | |
 | **limit** | **Integer**|  | [optional] |
 | **offset** | **Integer**|  | [optional] |
+| **transactionId** | **UUID**|  | [optional] |
 
 ### Return type
 
@@ -87,5 +89,5 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter userId, Invalid value for: query parameter limit, Invalid value for: query parameter offset |  -  |
+| **400** | Invalid value for: path parameter userId, Invalid value for: query parameter limit, Invalid value for: query parameter offset, Invalid value for: query parameter transactionId |  -  |
 

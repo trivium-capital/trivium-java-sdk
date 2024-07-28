@@ -356,7 +356,7 @@ public class Example {
         httpAuth.setBearerToken("BEARER TOKEN");
 
         CashApi apiInstance = new CashApi(defaultClient);
-        UUID accountId = UUID.fromString("e63b255b-8ece-458b-ba26-d8e77188857a"); // UUID | 
+        UUID accountId = UUID.fromString("40117016-ac89-4690-9986-01102be1ac9b"); // UUID | 
         Integer limit = 56; // Integer | 
         Integer offset = 56; // Integer | 
         Boolean paginate = true; // Boolean | 
@@ -558,7 +558,7 @@ public class Example {
 
 ## postApiV1CashRequestDepositAccountid
 
-> postApiV1CashRequestDepositAccountid(accountId, depositRequest)
+> DepositResponse postApiV1CashRequestDepositAccountid(accountId, depositRequest, xDeduplicationId)
 
 
 
@@ -593,8 +593,10 @@ public class Example {
         CashApi apiInstance = new CashApi(defaultClient);
         UUID accountId = UUID.fromString("40117016-ac89-4690-9986-01102be1ac9b"); // UUID | 
         DepositRequest depositRequest = new DepositRequest(); // DepositRequest | 
+        String xDeduplicationId = "xDeduplicationId_example"; // String | Unique value to be used for deduplication in case of network failure. Valid length is 1-64 characters.
         try {
-            apiInstance.postApiV1CashRequestDepositAccountid(accountId, depositRequest);
+            DepositResponse result = apiInstance.postApiV1CashRequestDepositAccountid(accountId, depositRequest, xDeduplicationId);
+            System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CashApi#postApiV1CashRequestDepositAccountid");
             System.err.println("Status code: " + e.getCode());
@@ -613,10 +615,11 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **accountId** | **UUID**|  | |
 | **depositRequest** | [**DepositRequest**](DepositRequest.md)|  | |
+| **xDeduplicationId** | **String**| Unique value to be used for deduplication in case of network failure. Valid length is 1-64 characters. | [optional] |
 
 ### Return type
 
-null (empty response body)
+[**DepositResponse**](DepositResponse.md)
 
 ### Authorization
 
@@ -625,19 +628,20 @@ null (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: text/plain
+- **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter accountId, Invalid value for: body |  -  |
+| **400** |  |  -  |
+| **401** | Invalid value for X-Api-Key or Authorization HTTP header |  -  |
 
 
 ## postApiV1CashRequestRedemptionAccountid
 
-> postApiV1CashRequestRedemptionAccountid(accountId, redemptionRequest)
+> RedemptionResponse postApiV1CashRequestRedemptionAccountid(accountId, redemptionRequest, xDeduplicationId)
 
 
 
@@ -672,8 +676,10 @@ public class Example {
         CashApi apiInstance = new CashApi(defaultClient);
         UUID accountId = UUID.fromString("40117016-ac89-4690-9986-01102be1ac9b"); // UUID | 
         RedemptionRequest redemptionRequest = new RedemptionRequest(); // RedemptionRequest | 
+        String xDeduplicationId = "xDeduplicationId_example"; // String | Unique value to be used for deduplication in case of network failure. Valid length is 1-64 characters.
         try {
-            apiInstance.postApiV1CashRequestRedemptionAccountid(accountId, redemptionRequest);
+            RedemptionResponse result = apiInstance.postApiV1CashRequestRedemptionAccountid(accountId, redemptionRequest, xDeduplicationId);
+            System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CashApi#postApiV1CashRequestRedemptionAccountid");
             System.err.println("Status code: " + e.getCode());
@@ -692,10 +698,11 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **accountId** | **UUID**|  | |
 | **redemptionRequest** | [**RedemptionRequest**](RedemptionRequest.md)|  | |
+| **xDeduplicationId** | **String**| Unique value to be used for deduplication in case of network failure. Valid length is 1-64 characters. | [optional] |
 
 ### Return type
 
-null (empty response body)
+[**RedemptionResponse**](RedemptionResponse.md)
 
 ### Authorization
 
@@ -704,12 +711,13 @@ null (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: text/plain
+- **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter accountId, Invalid value for: body |  -  |
+| **400** |  |  -  |
+| **401** | Invalid value for X-Api-Key or Authorization HTTP header |  -  |
 

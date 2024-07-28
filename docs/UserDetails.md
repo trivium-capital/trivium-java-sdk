@@ -5,5 +5,6 @@
 ## Implementing Classes
 
 * CompanyDetails
+* IndividualDetails
 
 

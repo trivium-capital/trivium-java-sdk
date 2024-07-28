@@ -46,7 +46,8 @@ public class TransactionsApiTest {
         UUID userId = null;
         Integer limit = null;
         Integer offset = null;
-        PaginationResultUserTransaction response = api.getApiV1TransactionsUserid(userId, limit, offset);
+        UUID transactionId = null;
+        PaginationResultUserTransaction response = api.getApiV1TransactionsUserid(userId, limit, offset, transactionId);
 
         // TODO: test validations
     }
