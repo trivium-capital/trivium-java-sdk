@@ -19,6 +19,7 @@ openapi-generator generate \
     --additional-properties=generateBuilders=true \
     --additional-properties=generateConstructorWithAllArgs=true \
     --additional-properties=groupId=tech.triviumcapital.clients \
+    --additional-properties=hideGenerationTimestamp=true \
     --additional-properties=invokerPackage=tech.triviumcapital.clients.java \
     --additional-properties=licenseName=MIT \
     --additional-properties=licenseUrl=https://github.com/trivium-capital/trivium-java-sdk/blob/main/LICENSE \
