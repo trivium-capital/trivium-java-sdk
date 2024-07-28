@@ -1,22 +1,22 @@
 openapi: 3.1.0
 info:
   title: trivium-cash
-  version: 0.1.0
+  version: 0.2.0
 paths:
   /api/v1/user/{userId}:
     get:
       tags:
-      - user
+        - user
       description: Returns user that has zero or more accounts
       operationId: getApiV1UserUserid
       parameters:
-      - name: userId
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        example: e63b255b-8ece-458b-ba26-d8e77188857a
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: e63b255b-8ece-458b-ba26-d8e77188857a
       responses:
         '200':
           description: ''
@@ -28,39 +28,33 @@ paths:
                 userId: e63b255b-8ece-458b-ba26-d8e77188857a
                 status: ACTIVE
                 accounts:
-                - accountId: 40117016-ac89-4690-9986-01102be1ac9b
-                  accountType: CASH
-                  currencyCode: SGD
-                  status: PENDING
-                  provider:
-                    provider: Investment Bank
-                    productName: Flexible Cash
+                  - accountId: 40117016-ac89-4690-9986-01102be1ac9b
+                    accountType: CASH
                     currencyCode: SGD
-                    returns: 0.038
-                  earningsToDate:
-                    earnings: 15.02
-                  localDepositInstructions:
-                    type: Fast
-                    accountNumber: '87654321'
-                    recipientName: CLIENT SGD ACC
-                    bank: HSBC_CORP
-                    reference: C123456
-                  depositInstructions:
-                    local:
-                    - type: Fast
-                      accountNumber: '87654321'
-                      recipientName: CLIENT SGD ACC
-                      bank: HSBC_CORP
-                      reference: C123456
-                    global:
-                    - type: Swift
-                      accountNumber: '3333333'
-                      accountHolderName: CLIENT USD ACC
-                      accountHolderAddress: 1 Lorong Satu, Singapore 110111
-                      bankName: JPMORGAN CHASE BANK
-                      bankAddress: 270 Park Avenue, New York, NY 10017
-                      swiftCode: CHASUS33XXX
-                      reference: C223456
+                    status: PENDING
+                    provider:
+                      provider: Investment Bank
+                      productName: Flexible Cash
+                      currencyCode: SGD
+                      returns: 0.038
+                    earningsToDate:
+                      earnings: 15.02
+                    depositInstructions:
+                      local:
+                        - type: Fast
+                          accountNumber: '87654321'
+                          recipientName: CLIENT SGD ACC
+                          bank: HSBC_CORP
+                          reference: C123456
+                      global:
+                        - type: Swift
+                          accountNumber: '3333333'
+                          accountHolderName: CLIENT USD ACC
+                          accountHolderAddress: 1 Lorong Satu, Singapore 110111
+                          bankName: JPMORGAN CHASE BANK
+                          bankAddress: 270 Park Avenue, New York, NY 10017
+                          swiftCode: CHASUS33XXX
+                          reference: C223456
         '400':
           description: 'Invalid value for: path parameter userId'
           content:
@@ -68,12 +62,12 @@ paths:
               schema:
                 type: string
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/user:
     post:
       tags:
-      - user
+        - user
       description: Create new user
       operationId: postApiV1User
       requestBody:
@@ -81,13 +75,22 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserDetails'
-            example:
-              type: CompanyDetails
-              taxId: 2024112233D
-              companyName: Heavy Metal Industry Pte. Ltd.
-              email: cfo@heavymetalindustry.com.sg
-              fullName: Jonathan Tan Ah Kow
-              preferredName: Jonathan
+            examples:
+              Company:
+                value:
+                  type: CompanyDetails
+                  taxId: 2024112233D
+                  companyName: Heavy Metal Industry Pte. Ltd.
+                  email: cfo@heavymetalindustry.com.sg
+                  fullName: Jonathan Tan Ah Kow
+                  preferredName: Jonathan
+                  countryOfIncorporation: SG
+              Individual:
+                value:
+                  type: IndividualDetails
+                  identityNumber: S7714618A
+                  fullName: Jonathan Tan Ah Kow
+                  nationality: SG
         required: true
       responses:
         '200':
@@ -107,21 +110,65 @@ paths:
               schema:
                 type: string
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
+  /api/v1/user/{userId}/documents:
+    post:
+      tags:
+        - user
+      description: Retrieve upload link for user documents
+      operationId: postApiV1UserUseridDocuments
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: e63b255b-8ece-458b-ba26-d8e77188857a
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOnboardingDocumentRequest'
+            example:
+              taxId: 2024116677R
+              documentType: PROOF_OF_COMPANY_REGISTRATION
+              documentName: Company Registration.pdf
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOnboardingDocumentResponse'
+              example:
+                id: b33124fe-8eb1-448b-8ddd-55f5bdd91174
+                uploadLink: https://example-bucket.s3.ap-southeast-1.amazonaws.com/provider/2024116677R/b33124fe-8eb1-448b-8ddd-55f5bdd91174/Company%20Registration.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240509T034631Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE/20240509/ap-southeast-1/s3/aws4_request&X-Amz-Expires=3600&X-Amz-Signature=37443067fb52e121265493e1a66a06caf089bfb1c0a15fa20c4530d3fbcfcefe
+        '400':
+          description: 'Invalid value for: path parameter userId, Invalid value for:
+            body'
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/cash/account/{accountId}:
     get:
       tags:
-      - cash
+        - cash
       operationId: getApiV1CashAccountAccountid
       parameters:
-      - name: accountId
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        example: 40117016-ac89-4690-9986-01102be1ac9b
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 40117016-ac89-4690-9986-01102be1ac9b
       responses:
         '200':
           description: ''
@@ -141,28 +188,22 @@ paths:
                   returns: 0.038
                 earningsToDate:
                   earnings: 15.02
-                localDepositInstructions:
-                  type: Fast
-                  accountNumber: '87654321'
-                  recipientName: CLIENT SGD ACC
-                  bank: HSBC_CORP
-                  reference: C123456
                 depositInstructions:
                   local:
-                  - type: Fast
-                    accountNumber: '87654321'
-                    recipientName: CLIENT SGD ACC
-                    bank: HSBC_CORP
-                    reference: C123456
+                    - type: Fast
+                      accountNumber: '87654321'
+                      recipientName: CLIENT SGD ACC
+                      bank: HSBC_CORP
+                      reference: C123456
                   global:
-                  - type: Swift
-                    accountNumber: '3333333'
-                    accountHolderName: CLIENT USD ACC
-                    accountHolderAddress: 1 Lorong Satu, Singapore 110111
-                    bankName: JPMORGAN CHASE BANK
-                    bankAddress: 270 Park Avenue, New York, NY 10017
-                    swiftCode: CHASUS33XXX
-                    reference: C223456
+                    - type: Swift
+                      accountNumber: '3333333'
+                      accountHolderName: CLIENT USD ACC
+                      accountHolderAddress: 1 Lorong Satu, Singapore 110111
+                      bankName: JPMORGAN CHASE BANK
+                      bankAddress: 270 Park Avenue, New York, NY 10017
+                      swiftCode: CHASUS33XXX
+                      reference: C223456
         '400':
           description: 'Invalid value for: path parameter accountId'
           content:
@@ -170,22 +211,22 @@ paths:
               schema:
                 type: string
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/cash/account/user/{userId}:
     get:
       tags:
-      - cash
+        - cash
       description: Returns cash accounts for given user id
       operationId: getApiV1CashAccountUserUserid
       parameters:
-      - name: userId
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        example: e63b255b-8ece-458b-ba26-d8e77188857a
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: e63b255b-8ece-458b-ba26-d8e77188857a
       responses:
         '200':
           description: ''
@@ -196,39 +237,33 @@ paths:
                 items:
                   $ref: '#/components/schemas/Account'
               example:
-              - accountId: 40117016-ac89-4690-9986-01102be1ac9b
-                accountType: CASH
-                currencyCode: SGD
-                status: PENDING
-                provider:
-                  provider: Investment Bank
-                  productName: Flexible Cash
+                - accountId: 40117016-ac89-4690-9986-01102be1ac9b
+                  accountType: CASH
                   currencyCode: SGD
-                  returns: 0.038
-                earningsToDate:
-                  earnings: 15.02
-                localDepositInstructions:
-                  type: Fast
-                  accountNumber: '87654321'
-                  recipientName: CLIENT SGD ACC
-                  bank: HSBC_CORP
-                  reference: C123456
-                depositInstructions:
-                  local:
-                  - type: Fast
-                    accountNumber: '87654321'
-                    recipientName: CLIENT SGD ACC
-                    bank: HSBC_CORP
-                    reference: C123456
-                  global:
-                  - type: Swift
-                    accountNumber: '3333333'
-                    accountHolderName: CLIENT USD ACC
-                    accountHolderAddress: 1 Lorong Satu, Singapore 110111
-                    bankName: JPMORGAN CHASE BANK
-                    bankAddress: 270 Park Avenue, New York, NY 10017
-                    swiftCode: CHASUS33XXX
-                    reference: C223456
+                  status: PENDING
+                  provider:
+                    provider: Investment Bank
+                    productName: Flexible Cash
+                    currencyCode: SGD
+                    returns: 0.038
+                  earningsToDate:
+                    earnings: 15.02
+                  depositInstructions:
+                    local:
+                      - type: Fast
+                        accountNumber: '87654321'
+                        recipientName: CLIENT SGD ACC
+                        bank: HSBC_CORP
+                        reference: C123456
+                    global:
+                      - type: Swift
+                        accountNumber: '3333333'
+                        accountHolderName: CLIENT USD ACC
+                        accountHolderAddress: 1 Lorong Satu, Singapore 110111
+                        bankName: JPMORGAN CHASE BANK
+                        bankAddress: 270 Park Avenue, New York, NY 10017
+                        swiftCode: CHASUS33XXX
+                        reference: C223456
         '400':
           description: 'Invalid value for: path parameter userId'
           content:
@@ -236,12 +271,12 @@ paths:
               schema:
                 type: string
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/cash/account:
     post:
       tags:
-      - cash
+        - cash
       description: Create cash account
       operationId: postApiV1CashAccount
       requestBody:
@@ -274,28 +309,22 @@ paths:
                   returns: 0.038
                 earningsToDate:
                   earnings: 15.02
-                localDepositInstructions:
-                  type: Fast
-                  accountNumber: '87654321'
-                  recipientName: CLIENT SGD ACC
-                  bank: HSBC_CORP
-                  reference: C123456
                 depositInstructions:
                   local:
-                  - type: Fast
-                    accountNumber: '87654321'
-                    recipientName: CLIENT SGD ACC
-                    bank: HSBC_CORP
-                    reference: C123456
+                    - type: Fast
+                      accountNumber: '87654321'
+                      recipientName: CLIENT SGD ACC
+                      bank: HSBC_CORP
+                      reference: C123456
                   global:
-                  - type: Swift
-                    accountNumber: '3333333'
-                    accountHolderName: CLIENT USD ACC
-                    accountHolderAddress: 1 Lorong Satu, Singapore 110111
-                    bankName: JPMORGAN CHASE BANK
-                    bankAddress: 270 Park Avenue, New York, NY 10017
-                    swiftCode: CHASUS33XXX
-                    reference: C223456
+                    - type: Swift
+                      accountNumber: '3333333'
+                      accountHolderName: CLIENT USD ACC
+                      accountHolderAddress: 1 Lorong Satu, Singapore 110111
+                      bankName: JPMORGAN CHASE BANK
+                      bankAddress: 270 Park Avenue, New York, NY 10017
+                      swiftCode: CHASUS33XXX
+                      reference: C223456
         '400':
           description: 'Invalid value for: body'
           content:
@@ -303,22 +332,22 @@ paths:
               schema:
                 type: string
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/cash/balance/{userId}:
     get:
       tags:
-      - cash
+        - cash
       description: Returns balance according to currency
       operationId: getApiV1CashBalanceUserid
       parameters:
-      - name: userId
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        example: e63b255b-8ece-458b-ba26-d8e77188857a
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: e63b255b-8ece-458b-ba26-d8e77188857a
       responses:
         '200':
           description: ''
@@ -338,39 +367,39 @@ paths:
               schema:
                 type: string
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/cash/transactions/{accountId}:
     get:
       tags:
-      - cash
+        - cash
       description: Get list of deposit and transaction requests
       operationId: getApiV1CashTransactionsAccountid
       parameters:
-      - name: accountId
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        example: e63b255b-8ece-458b-ba26-d8e77188857a
-      - name: limit
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - name: offset
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - name: paginate
-        in: query
-        required: false
-        schema:
-          type: boolean
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 40117016-ac89-4690-9986-01102be1ac9b
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: paginate
+          in: query
+          required: false
+          schema:
+            type: boolean
       responses:
         '200':
           description: ''
@@ -380,18 +409,18 @@ paths:
                 $ref: '#/components/schemas/Transactions'
               example:
                 transactions:
-                - type: Deposit
-                  accountId: 40117016-ac89-4690-9986-01102be1ac9b
-                  quantity: 1007.33
-                  currencyCode: SGD
-                  receivedAt: '2024-04-09T08:26:55.945096Z'
-                  status: PENDING
-                - type: Redemption
-                  accountId: 40117016-ac89-4690-9986-01102be1ac9b
-                  quantity: 50.45
-                  currencyCode: SGD
-                  receivedAt: '2024-04-09T08:26:55.946397Z'
-                  status: PENDING
+                  - type: Deposit
+                    accountId: 40117016-ac89-4690-9986-01102be1ac9b
+                    quantity: 1007.33
+                    currencyCode: SGD
+                    receivedAt: '2024-07-17T09:07:20.930356265Z'
+                    status: PENDING
+                  - type: Redemption
+                    accountId: 40117016-ac89-4690-9986-01102be1ac9b
+                    quantity: 50.45
+                    currencyCode: SGD
+                    receivedAt: '2024-07-17T09:07:20.931685412Z'
+                    status: PENDING
                 totalCount: 2
                 hasNextPage: false
         '400':
@@ -404,12 +433,12 @@ paths:
                 type: string
       deprecated: true
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/cash/transactions/redemption/info:
     get:
       tags:
-      - cash
+        - cash
       description: Get redemption information
       operationId: getApiV1CashTransactionsRedemptionInfo
       responses:
@@ -420,36 +449,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/RedemptionInfo'
               example:
-                redemptionDate: '2024-04-10'
+                redemptionDate: '2024-07-18'
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/transactions/{userId}:
     get:
       tags:
-      - transactions
+        - transactions
       description: Get list of transactions for all products for user
       operationId: getApiV1TransactionsUserid
       parameters:
-      - name: userId
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        example: e63b255b-8ece-458b-ba26-d8e77188857a
-      - name: limit
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - name: offset
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: e63b255b-8ece-458b-ba26-d8e77188857a
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: transactionId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
       responses:
         '200':
           description: ''
@@ -459,18 +494,19 @@ paths:
                 $ref: '#/components/schemas/PaginationResult_UserTransaction'
         '400':
           description: 'Invalid value for: path parameter userId, Invalid value for:
-            query parameter limit, Invalid value for: query parameter offset'
+            query parameter limit, Invalid value for: query parameter offset, Invalid
+            value for: query parameter transactionId'
           content:
             text/plain:
               schema:
                 type: string
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/cash/rates:
     get:
       tags:
-      - cash
+        - cash
       description: Returns rates according to currency in decimal format. Multiply
         by 100 for percentage points.
       operationId: getApiV1CashRates
@@ -485,22 +521,29 @@ paths:
                 rates:
                   SGD: 0.019
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/cash/request/deposit/{accountId}:
     post:
       tags:
-      - cash
+        - cash
       description: Create deposit request
       operationId: postApiV1CashRequestDepositAccountid
       parameters:
-      - name: accountId
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        example: 40117016-ac89-4690-9986-01102be1ac9b
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 40117016-ac89-4690-9986-01102be1ac9b
+        - name: X-Deduplication-Id
+          in: header
+          description: Unique value to be used for deduplication in case of network
+            failure. Valid length is 1-64 characters.
+          required: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -509,12 +552,6 @@ paths:
             example:
               quantity: 1007.33
               currencyCode: SGD
-              transferDetails:
-                type: Fast
-                accountNumber: '87654321'
-                recipientName: CLIENT SGD ACC
-                bank: HSBC_CORP
-                reference: C123456
               transfer:
                 from:
                   type: Fast
@@ -531,30 +568,46 @@ paths:
       responses:
         '200':
           description: ''
-        '400':
-          description: 'Invalid value for: path parameter accountId, Invalid value
-            for: body'
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/DepositResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Invalid value for X-Api-Key or Authorization HTTP header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/cash/request/redemption/{accountId}:
     post:
       tags:
-      - cash
+        - cash
       description: Create redemption request
       operationId: postApiV1CashRequestRedemptionAccountid
       parameters:
-      - name: accountId
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        example: 40117016-ac89-4690-9986-01102be1ac9b
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 40117016-ac89-4690-9986-01102be1ac9b
+        - name: X-Deduplication-Id
+          in: header
+          description: Unique value to be used for deduplication in case of network
+            failure. Valid length is 1-64 characters.
+          required: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -572,30 +625,39 @@ paths:
       responses:
         '200':
           description: ''
-        '400':
-          description: 'Invalid value for: path parameter accountId, Invalid value
-            for: body'
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RedemptionResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Invalid value for X-Api-Key or Authorization HTTP header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/fixedDeposit/placement/{placementId}:
     get:
       tags:
-      - fixedDeposit
+        - fixedDeposit
       description: Get fixed deposit placement
       operationId: getApiV1FixeddepositPlacementPlacementid
       parameters:
-      - name: placementId
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        example: f5d15e38-c21b-4295-95fc-87233edf7069
+        - name: placementId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: f5d15e38-c21b-4295-95fc-87233edf7069
       responses:
         '200':
           description: ''
@@ -616,19 +678,19 @@ paths:
                 term: P3M
                 depositInstructions:
                   local:
-                  - type: Fast
-                    accountNumber: '111111'
-                    recipientName: Corporate Pte. Ltd.
-                    bank: HSBC_CORP
+                    - type: Fast
+                      accountNumber: '111111'
+                      recipientName: Corporate Pte. Ltd.
+                      bank: HSBC_CORP
                   global:
-                  - type: Swift
-                    accountNumber: '3333333'
-                    accountHolderName: CLIENT USD ACC
-                    accountHolderAddress: 1 Lorong Satu, Singapore 110111
-                    bankName: JPMORGAN CHASE BANK
-                    bankAddress: 270 Park Avenue, New York, NY 10017
-                    swiftCode: CHASUS33XXX
-                    reference: C333456
+                    - type: Swift
+                      accountNumber: '3333333'
+                      accountHolderName: CLIENT USD ACC
+                      accountHolderAddress: 1 Lorong Satu, Singapore 110111
+                      bankName: JPMORGAN CHASE BANK
+                      bankAddress: 270 Park Avenue, New York, NY 10017
+                      swiftCode: CHASUS33XXX
+                      reference: C333456
         '400':
           description: 'Invalid value for: path parameter placementId'
           content:
@@ -636,21 +698,21 @@ paths:
               schema:
                 type: string
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
     put:
       tags:
-      - fixedDeposit
+        - fixedDeposit
       description: Start processing fixed deposit placement
       operationId: putApiV1FixeddepositPlacementPlacementid
       parameters:
-      - name: placementId
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        example: f5d15e38-c21b-4295-95fc-87233edf7069
+        - name: placementId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: f5d15e38-c21b-4295-95fc-87233edf7069
       requestBody:
         content:
           application/json:
@@ -681,22 +743,22 @@ paths:
               schema:
                 type: string
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
   /api/v1/fixedDeposit/user/{userId}:
     get:
       tags:
-      - fixedDeposit
+        - fixedDeposit
       description: Get fixed deposit placement
       operationId: getApiV1FixeddepositUserUserid
       parameters:
-      - name: userId
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        example: e63b255b-8ece-458b-ba26-d8e77188857a
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: e63b255b-8ece-458b-ba26-d8e77188857a
       responses:
         '200':
           description: ''
@@ -707,31 +769,31 @@ paths:
                 items:
                   $ref: '#/components/schemas/FixedDepositPlacement'
               example:
-              - type: PendingFixedDeposit
-                placementId: f5d15e38-c21b-4295-95fc-87233edf7069
-                currencyCode: SGD
-                providerDetails:
-                  provider: Investment Bank
-                  productName: Fixed Deposit
-                  productDistinction: 3 Month Fixed Deposit
+                - type: PendingFixedDeposit
+                  placementId: f5d15e38-c21b-4295-95fc-87233edf7069
                   currencyCode: SGD
-                  returns: 0.038
-                term: P3M
-                depositInstructions:
-                  local:
-                  - type: Fast
-                    accountNumber: '111111'
-                    recipientName: Corporate Pte. Ltd.
-                    bank: HSBC_CORP
-                  global:
-                  - type: Swift
-                    accountNumber: '3333333'
-                    accountHolderName: CLIENT USD ACC
-                    accountHolderAddress: 1 Lorong Satu, Singapore 110111
-                    bankName: JPMORGAN CHASE BANK
-                    bankAddress: 270 Park Avenue, New York, NY 10017
-                    swiftCode: CHASUS33XXX
-                    reference: C333456
+                  providerDetails:
+                    provider: Investment Bank
+                    productName: Fixed Deposit
+                    productDistinction: 3 Month Fixed Deposit
+                    currencyCode: SGD
+                    returns: 0.038
+                  term: P3M
+                  depositInstructions:
+                    local:
+                      - type: Fast
+                        accountNumber: '111111'
+                        recipientName: Corporate Pte. Ltd.
+                        bank: HSBC_CORP
+                    global:
+                      - type: Swift
+                        accountNumber: '3333333'
+                        accountHolderName: CLIENT USD ACC
+                        accountHolderAddress: 1 Lorong Satu, Singapore 110111
+                        bankName: JPMORGAN CHASE BANK
+                        bankAddress: 270 Park Avenue, New York, NY 10017
+                        swiftCode: CHASUS33XXX
+                        reference: C333456
         '400':
           description: 'Invalid value for: path parameter userId'
           content:
@@ -739,20 +801,57 @@ paths:
               schema:
                 type: string
       security:
-      - apiKeyAuth: []
-        httpAuth: []
+        - apiKeyAuth: []
+          httpAuth: []
+  /api/v1/statement/monthly/{userId}:
+    get:
+      tags:
+        - statement
+      description: Returns list of links to monthly statement documents
+      operationId: getApiV1StatementMonthlyUserid
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: e63b255b-8ece-458b-ba26-d8e77188857a
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonthlyStatementMetadata'
+              example:
+                - year: 2024
+                  month: 5
+                  downloadLink: https://example-bucket.s3.ap-southeast-1.amazonaws.com/e63b255b-8ece-458b-ba26-d8e77188857a/investment_bank/2024/05/statement.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240509T034631Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE/20240509/ap-southeast-1/s3/aws4_request&X-Amz-Expires=3600&X-Amz-Signature=37443067fb52e121265493e1a66a06caf089bfb1c0a15fa20c4530d3fbcfcefe
+        '400':
+          description: 'Invalid value for: path parameter userId'
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+        - apiKeyAuth: []
+          httpAuth: []
 components:
   schemas:
     Account:
-      required:
-      - accountId
-      - accountType
-      - currencyCode
-      - status
-      - provider
-      - earningsToDate
-      - depositInstructions
+      title: Account
       type: object
+      required:
+        - accountId
+        - accountType
+        - currencyCode
+        - status
+        - provider
+        - earningsToDate
+        - depositInstructions
       properties:
         accountId:
           type: string
@@ -767,47 +866,57 @@ components:
           $ref: '#/components/schemas/ProviderDetails'
         earningsToDate:
           $ref: '#/components/schemas/EarningsToDate'
-        localDepositInstructions:
-          $ref: '#/components/schemas/LocalTransfer'
-          deprecated: true
         depositInstructions:
           $ref: '#/components/schemas/DepositInstructions'
     AccountStatus:
+      title: AccountStatus
       type: string
       enum:
-      - ACTIVE
-      - PENDING
+        - ACTIVE
+        - PENDING
     AccountType:
+      title: AccountType
       type: string
       enum:
-      - CASH
-    Balance:
-      required:
-      - totalBalance
-      - availableBalance
+        - CASH
+    BadRequest:
+      title: BadRequest
       type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+    Balance:
+      title: Balance
+      type: object
+      required:
+        - totalBalance
+        - availableBalance
       properties:
         totalBalance:
           type: number
         availableBalance:
           type: number
     Balances:
-      required:
-      - balance
+      title: Balances
       type: object
+      required:
+        - balance
       properties:
         balance:
           $ref: '#/components/schemas/Map_Balance'
     CashDeposit:
-      required:
-      - transactionId
-      - productId
-      - quantity
-      - currencyCode
-      - receivedAt
-      - status
-      - type
+      title: CashDeposit
       type: object
+      required:
+        - transactionId
+        - productId
+        - quantity
+        - currencyCode
+        - receivedAt
+        - status
+        - type
       properties:
         transactionId:
           type: string
@@ -827,15 +936,16 @@ components:
         type:
           type: string
     CashRedemption:
-      required:
-      - transactionId
-      - productId
-      - quantity
-      - currencyCode
-      - receivedAt
-      - status
-      - type
+      title: CashRedemption
       type: object
+      required:
+        - transactionId
+        - productId
+        - quantity
+        - currencyCode
+        - receivedAt
+        - status
+        - type
       properties:
         transactionId:
           type: string
@@ -855,14 +965,16 @@ components:
         type:
           type: string
     CompanyDetails:
-      required:
-      - taxId
-      - companyName
-      - email
-      - fullName
-      - preferredName
-      - type
+      title: CompanyDetails
       type: object
+      required:
+        - taxId
+        - companyName
+        - email
+        - fullName
+        - preferredName
+        - countryOfIncorporation
+        - type
       properties:
         taxId:
           type: string
@@ -871,17 +983,21 @@ components:
         email:
           type: string
         fullName:
+          description: Name of Authorised Person
           type: string
         preferredName:
+          type: string
+        countryOfIncorporation:
           type: string
         type:
           type: string
     CreateAccountRequest:
-      required:
-      - userId
-      - accountType
-      - currencyCode
+      title: CreateAccountRequest
       type: object
+      required:
+        - userId
+        - accountType
+        - currencyCode
       properties:
         userId:
           type: string
@@ -890,15 +1006,44 @@ components:
           $ref: '#/components/schemas/AccountType'
         currencyCode:
           type: string
-    Deposit:
-      required:
-      - accountId
-      - quantity
-      - currencyCode
-      - receivedAt
-      - status
-      - type
+    CreateOnboardingDocumentRequest:
+      title: CreateOnboardingDocumentRequest
       type: object
+      required:
+        - taxId
+        - documentType
+        - documentName
+      properties:
+        taxId:
+          type: string
+        documentType:
+          $ref: '#/components/schemas/OnboardingDocumentType'
+        documentName:
+          type: string
+    CreateOnboardingDocumentResponse:
+      title: CreateOnboardingDocumentResponse
+      type: object
+      required:
+        - id
+        - uploadLink
+      properties:
+        id:
+          type: string
+          format: uuid
+        uploadLink:
+          description: To upload document, perform a PUT request to this link with
+            the file as the body.
+          type: string
+    Deposit:
+      title: Deposit
+      type: object
+      required:
+        - accountId
+        - quantity
+        - currencyCode
+        - receivedAt
+        - status
+        - type
       properties:
         accountId:
           type: string
@@ -915,6 +1060,7 @@ components:
         type:
           type: string
     DepositInstructions:
+      title: DepositInstructions
       type: object
       properties:
         local:
@@ -926,34 +1072,44 @@ components:
           items:
             $ref: '#/components/schemas/InternationalTransfer'
     DepositRequest:
-      required:
-      - quantity
-      - currencyCode
+      title: DepositRequest
       type: object
+      required:
+        - quantity
+        - currencyCode
+        - transfer
       properties:
         quantity:
           type: number
         currencyCode:
           type: string
-        transferDetails:
-          $ref: '#/components/schemas/TransferDetails'
-          deprecated: true
         transfer:
           $ref: '#/components/schemas/Transfer'
-    EarningsToDate:
-      required:
-      - earnings
+    DepositResponse:
+      title: DepositResponse
       type: object
+      required:
+        - transactionId
+      properties:
+        transactionId:
+          type: string
+          format: uuid
+    EarningsToDate:
+      title: EarningsToDate
+      type: object
+      required:
+        - earnings
       properties:
         earnings:
           type: number
     Fast:
-      required:
-      - accountNumber
-      - recipientName
-      - bank
-      - type
+      title: Fast
       type: object
+      required:
+        - accountNumber
+        - recipientName
+        - bank
+        - type
       properties:
         accountNumber:
           type: string
@@ -966,22 +1122,24 @@ components:
         type:
           type: string
     FastParticipant:
-      type: string
+      title: FastParticipant
       description: |
         Full names of banks:
         DBS - DBS Bank Ltd,
         HSBC_CORP - HSBC Bank (Corporate),
         HSBC_SG - HSBC Bank (Singapore)
+      type: string
       enum:
-      - DBS
-      - HSBC_CORP
-      - HSBC_SG
+        - DBS
+        - HSBC_CORP
+        - HSBC_SG
     FixedDepositPlacement:
+      title: FixedDepositPlacement
       oneOf:
-      - $ref: '#/components/schemas/LockedFixedDeposit'
-      - $ref: '#/components/schemas/PendingFixedDeposit'
-      - $ref: '#/components/schemas/ProcessingFixedDeposit'
-      - $ref: '#/components/schemas/RedeemedFixedDeposit'
+        - $ref: '#/components/schemas/LockedFixedDeposit'
+        - $ref: '#/components/schemas/PendingFixedDeposit'
+        - $ref: '#/components/schemas/ProcessingFixedDeposit'
+        - $ref: '#/components/schemas/RedeemedFixedDeposit'
       discriminator:
         propertyName: type
         mapping:
@@ -990,15 +1148,16 @@ components:
           ProcessingFixedDeposit: '#/components/schemas/ProcessingFixedDeposit'
           RedeemedFixedDeposit: '#/components/schemas/RedeemedFixedDeposit'
     FixedDepositRedemption:
-      required:
-      - transactionId
-      - productId
-      - quantity
-      - currencyCode
-      - receivedAt
-      - status
-      - type
+      title: FixedDepositRedemption
       type: object
+      required:
+        - transactionId
+        - productId
+        - quantity
+        - currencyCode
+        - receivedAt
+        - status
+        - type
       properties:
         transactionId:
           type: string
@@ -1018,15 +1177,16 @@ components:
         type:
           type: string
     FixedDepositTransfer:
-      required:
-      - transactionId
-      - productId
-      - quantity
-      - currencyCode
-      - receivedAt
-      - status
-      - type
+      title: FixedDepositTransfer
       type: object
+      required:
+        - transactionId
+        - productId
+        - quantity
+        - currencyCode
+        - receivedAt
+        - status
+        - type
       properties:
         transactionId:
           type: string
@@ -1045,33 +1205,53 @@ components:
           $ref: '#/components/schemas/TransactionStatus'
         type:
           type: string
+    IndividualDetails:
+      title: IndividualDetails
+      type: object
+      required:
+        - identityNumber
+        - fullName
+        - nationality
+        - type
+      properties:
+        identityNumber:
+          type: string
+        fullName:
+          type: string
+        nationality:
+          type: string
+        type:
+          type: string
     InternationalTransfer:
+      title: InternationalTransfer
       oneOf:
-      - $ref: '#/components/schemas/Swift'
+        - $ref: '#/components/schemas/Swift'
       discriminator:
         propertyName: type
         mapping:
           Swift: '#/components/schemas/Swift'
     LocalTransfer:
+      title: LocalTransfer
       oneOf:
-      - $ref: '#/components/schemas/Fast'
+        - $ref: '#/components/schemas/Fast'
       discriminator:
         propertyName: type
         mapping:
           Fast: '#/components/schemas/Fast'
     LockedFixedDeposit:
-      required:
-      - placementId
-      - investedQuantity
-      - currentValue
-      - currencyCode
-      - providerDetails
-      - term
-      - redemptionDate
-      - returnAtMaturity
-      - lockedRate
-      - type
+      title: LockedFixedDeposit
       type: object
+      required:
+        - placementId
+        - investedQuantity
+        - currentValue
+        - currencyCode
+        - providerDetails
+        - term
+        - redemptionDate
+        - returnAtMaturity
+        - lockedRate
+        - type
       properties:
         placementId:
           type: string
@@ -1085,9 +1265,9 @@ components:
         providerDetails:
           $ref: '#/components/schemas/ProviderDetails'
         term:
-          type: string
           description: Serialized as P{period}, e.g. 2 weeks = P14D, 3 months = P3M,
             1 year = P1Y
+          type: string
         redemptionDate:
           type: string
           format: date
@@ -1098,18 +1278,46 @@ components:
         type:
           type: string
     Map_Balance:
+      title: Map_Balance
       type: object
       additionalProperties:
         $ref: '#/components/schemas/Balance'
     Map_BigDecimal:
+      title: Map_BigDecimal
       type: object
       additionalProperties:
         type: number
-    PaginationResult_UserTransaction:
-      required:
-      - totalCount
-      - hasNextPage
+    MonthlyStatementMetadata:
+      title: MonthlyStatementMetadata
       type: object
+      required:
+        - year
+        - month
+        - downloadLink
+      properties:
+        year:
+          type: integer
+          format: int32
+        month:
+          description: Month of year, from 1 (January) to 12 (December)
+          type: integer
+          format: int32
+        downloadLink:
+          type: string
+    OnboardingDocumentType:
+      title: OnboardingDocumentType
+      type: string
+      enum:
+        - OTHER
+        - PROOF_OF_ADDRESS
+        - PROOF_OF_COMPANY_REGISTRATION
+        - PROOF_OF_IDENTITY
+    PaginationResult_UserTransaction:
+      title: PaginationResult_UserTransaction
+      type: object
+      required:
+        - totalCount
+        - hasNextPage
       properties:
         results:
           type: array
@@ -1121,14 +1329,15 @@ components:
         hasNextPage:
           type: boolean
     PendingFixedDeposit:
-      required:
-      - placementId
-      - currencyCode
-      - providerDetails
-      - term
-      - depositInstructions
-      - type
+      title: PendingFixedDeposit
       type: object
+      required:
+        - placementId
+        - currencyCode
+        - providerDetails
+        - term
+        - depositInstructions
+        - type
       properties:
         placementId:
           type: string
@@ -1138,32 +1347,34 @@ components:
         providerDetails:
           $ref: '#/components/schemas/ProviderDetails'
         term:
-          type: string
           description: Serialized as P{period}, e.g. 2 weeks = P14D, 3 months = P3M,
             1 year = P1Y
+          type: string
         depositInstructions:
           $ref: '#/components/schemas/DepositInstructions'
         type:
           type: string
     ProcessFixedDepositPlacementRequest:
-      required:
-      - quantity
-      - transfer
+      title: ProcessFixedDepositPlacementRequest
       type: object
+      required:
+        - quantity
+        - transfer
       properties:
         quantity:
           type: number
         transfer:
           $ref: '#/components/schemas/Transfer'
     ProcessingFixedDeposit:
-      required:
-      - placementId
-      - investedQuantity
-      - currencyCode
-      - providerDetails
-      - term
-      - type
+      title: ProcessingFixedDeposit
       type: object
+      required:
+        - placementId
+        - investedQuantity
+        - currencyCode
+        - providerDetails
+        - term
+        - type
       properties:
         placementId:
           type: string
@@ -1175,18 +1386,19 @@ components:
         providerDetails:
           $ref: '#/components/schemas/ProviderDetails'
         term:
-          type: string
           description: Serialized as P{period}, e.g. 2 weeks = P14D, 3 months = P3M,
             1 year = P1Y
+          type: string
         type:
           type: string
     ProviderDetails:
-      required:
-      - provider
-      - productName
-      - currencyCode
-      - returns
+      title: ProviderDetails
       type: object
+      required:
+        - provider
+        - productName
+        - currencyCode
+        - returns
       properties:
         provider:
           type: string
@@ -1199,25 +1411,27 @@ components:
         returns:
           type: number
     Rates:
-      required:
-      - rates
+      title: Rates
       type: object
+      required:
+        - rates
       properties:
         rates:
           $ref: '#/components/schemas/Map_BigDecimal'
     RedeemedFixedDeposit:
-      required:
-      - placementId
-      - investedQuantity
-      - redeemedValue
-      - currencyCode
-      - providerDetails
-      - term
-      - redemptionDate
-      - returnAtMaturity
-      - lockedRate
-      - type
+      title: RedeemedFixedDeposit
       type: object
+      required:
+        - placementId
+        - investedQuantity
+        - redeemedValue
+        - currencyCode
+        - providerDetails
+        - term
+        - redemptionDate
+        - returnAtMaturity
+        - lockedRate
+        - type
       properties:
         placementId:
           type: string
@@ -1231,9 +1445,9 @@ components:
         providerDetails:
           $ref: '#/components/schemas/ProviderDetails'
         term:
-          type: string
           description: Serialized as P{period}, e.g. 2 weeks = P14D, 3 months = P3M,
             1 year = P1Y
+          type: string
         redemptionDate:
           type: string
           format: date
@@ -1244,14 +1458,15 @@ components:
         type:
           type: string
     Redemption:
-      required:
-      - accountId
-      - quantity
-      - currencyCode
-      - receivedAt
-      - status
-      - type
+      title: Redemption
       type: object
+      required:
+        - accountId
+        - quantity
+        - currencyCode
+        - receivedAt
+        - status
+        - type
       properties:
         accountId:
           type: string
@@ -1268,19 +1483,21 @@ components:
         type:
           type: string
     RedemptionInfo:
-      required:
-      - redemptionDate
+      title: RedemptionInfo
       type: object
+      required:
+        - redemptionDate
       properties:
         redemptionDate:
           type: string
           format: date
     RedemptionRequest:
-      required:
-      - quantity
-      - currencyCode
-      - transferDetails
+      title: RedemptionRequest
       type: object
+      required:
+        - quantity
+        - currencyCode
+        - transferDetails
       properties:
         quantity:
           type: number
@@ -1288,14 +1505,24 @@ components:
           type: string
         transferDetails:
           $ref: '#/components/schemas/TransferDetails'
-    Swift:
-      required:
-      - accountNumber
-      - accountHolderName
-      - bankName
-      - swiftCode
-      - type
+    RedemptionResponse:
+      title: RedemptionResponse
       type: object
+      required:
+        - transactionId
+      properties:
+        transactionId:
+          type: string
+          format: uuid
+    Swift:
+      title: Swift
+      type: object
+      required:
+        - accountNumber
+        - accountHolderName
+        - bankName
+        - swiftCode
+        - type
       properties:
         accountNumber:
           type: string
@@ -1314,24 +1541,27 @@ components:
         type:
           type: string
     Transaction:
+      title: Transaction
       oneOf:
-      - $ref: '#/components/schemas/Deposit'
-      - $ref: '#/components/schemas/Redemption'
+        - $ref: '#/components/schemas/Deposit'
+        - $ref: '#/components/schemas/Redemption'
       discriminator:
         propertyName: type
         mapping:
           Deposit: '#/components/schemas/Deposit'
           Redemption: '#/components/schemas/Redemption'
     TransactionStatus:
+      title: TransactionStatus
       type: string
       enum:
-      - PENDING
-      - SETTLED
+        - PENDING
+        - SETTLED
     Transactions:
-      required:
-      - totalCount
-      - hasNextPage
+      title: Transactions
       type: object
+      required:
+        - totalCount
+        - hasNextPage
       properties:
         transactions:
           type: array
@@ -1343,29 +1573,40 @@ components:
         hasNextPage:
           type: boolean
     Transfer:
-      required:
-      - from
-      - to
+      title: Transfer
       type: object
+      required:
+        - from
+        - to
       properties:
         from:
           $ref: '#/components/schemas/TransferDetails'
         to:
           $ref: '#/components/schemas/TransferDetails'
     TransferDetails:
+      title: TransferDetails
       oneOf:
-      - $ref: '#/components/schemas/Fast'
-      - $ref: '#/components/schemas/Swift'
+        - $ref: '#/components/schemas/Fast'
+        - $ref: '#/components/schemas/Swift'
       discriminator:
         propertyName: type
         mapping:
           Fast: '#/components/schemas/Fast'
           Swift: '#/components/schemas/Swift'
-    User:
-      required:
-      - userId
-      - status
+    Unauthorized:
+      title: Unauthorized
       type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+    User:
+      title: User
+      type: object
+      required:
+        - userId
+        - status
       properties:
         userId:
           type: string
@@ -1377,23 +1618,28 @@ components:
           items:
             $ref: '#/components/schemas/Account'
     UserDetails:
+      title: UserDetails
       oneOf:
-      - $ref: '#/components/schemas/CompanyDetails'
+        - $ref: '#/components/schemas/CompanyDetails'
+        - $ref: '#/components/schemas/IndividualDetails'
       discriminator:
         propertyName: type
         mapping:
           CompanyDetails: '#/components/schemas/CompanyDetails'
+          IndividualDetails: '#/components/schemas/IndividualDetails'
     UserStatus:
+      title: UserStatus
       type: string
       enum:
-      - ACTIVE
-      - PENDING
+        - ACTIVE
+        - PENDING
     UserTransaction:
+      title: UserTransaction
       oneOf:
-      - $ref: '#/components/schemas/CashDeposit'
-      - $ref: '#/components/schemas/CashRedemption'
-      - $ref: '#/components/schemas/FixedDepositRedemption'
-      - $ref: '#/components/schemas/FixedDepositTransfer'
+        - $ref: '#/components/schemas/CashDeposit'
+        - $ref: '#/components/schemas/CashRedemption'
+        - $ref: '#/components/schemas/FixedDepositRedemption'
+        - $ref: '#/components/schemas/FixedDepositTransfer'
       discriminator:
         propertyName: type
         mapping:
