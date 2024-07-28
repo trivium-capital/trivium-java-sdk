@@ -5,7 +5,9 @@ docs/AccountType.md
 docs/BadRequest.md
 docs/Balance.md
 docs/Balances.md
+docs/CashAccountActivated.md
 docs/CashApi.md
+docs/CashCallbackEvent.md
 docs/CashDeposit.md
 docs/CashRedemption.md
 docs/CompanyDetails.md
@@ -16,6 +18,7 @@ docs/Deposit.md
 docs/DepositInstructions.md
 docs/DepositRequest.md
 docs/DepositResponse.md
+docs/DepositSettled.md
 docs/EarningsToDate.md
 docs/Fast.md
 docs/FastParticipant.md
@@ -41,6 +44,10 @@ docs/RedemptionInfo.md
 docs/RedemptionRequest.md
 docs/RedemptionResponse.md
 docs/StatementApi.md
+docs/SubscribeCallbackRequest.md
+docs/SubscribeCallbackRequestWithSignature.md
+docs/SubscribeCallbackResponse.md
+docs/SubscribeCallbackResponsePublicKey.md
 docs/Swift.md
 docs/Transaction.md
 docs/TransactionStatus.md
@@ -50,7 +57,9 @@ docs/Transfer.md
 docs/TransferDetails.md
 docs/Unauthorized.md
 docs/User.md
+docs/UserActivated.md
 docs/UserApi.md
+docs/UserCallbackEvent.md
 docs/UserDetails.md
 docs/UserStatus.md
 docs/UserTransaction.md
@@ -80,6 +89,8 @@ src/main/java/tech/triviumcapital/clients/java/model/AccountType.java
 src/main/java/tech/triviumcapital/clients/java/model/BadRequest.java
 src/main/java/tech/triviumcapital/clients/java/model/Balance.java
 src/main/java/tech/triviumcapital/clients/java/model/Balances.java
+src/main/java/tech/triviumcapital/clients/java/model/CashAccountActivated.java
+src/main/java/tech/triviumcapital/clients/java/model/CashCallbackEvent.java
 src/main/java/tech/triviumcapital/clients/java/model/CashDeposit.java
 src/main/java/tech/triviumcapital/clients/java/model/CashRedemption.java
 src/main/java/tech/triviumcapital/clients/java/model/CompanyDetails.java
@@ -90,6 +101,7 @@ src/main/java/tech/triviumcapital/clients/java/model/Deposit.java
 src/main/java/tech/triviumcapital/clients/java/model/DepositInstructions.java
 src/main/java/tech/triviumcapital/clients/java/model/DepositRequest.java
 src/main/java/tech/triviumcapital/clients/java/model/DepositResponse.java
+src/main/java/tech/triviumcapital/clients/java/model/DepositSettled.java
 src/main/java/tech/triviumcapital/clients/java/model/EarningsToDate.java
 src/main/java/tech/triviumcapital/clients/java/model/Fast.java
 src/main/java/tech/triviumcapital/clients/java/model/FastParticipant.java
@@ -113,6 +125,10 @@ src/main/java/tech/triviumcapital/clients/java/model/Redemption.java
 src/main/java/tech/triviumcapital/clients/java/model/RedemptionInfo.java
 src/main/java/tech/triviumcapital/clients/java/model/RedemptionRequest.java
 src/main/java/tech/triviumcapital/clients/java/model/RedemptionResponse.java
+src/main/java/tech/triviumcapital/clients/java/model/SubscribeCallbackRequest.java
+src/main/java/tech/triviumcapital/clients/java/model/SubscribeCallbackRequestWithSignature.java
+src/main/java/tech/triviumcapital/clients/java/model/SubscribeCallbackResponse.java
+src/main/java/tech/triviumcapital/clients/java/model/SubscribeCallbackResponsePublicKey.java
 src/main/java/tech/triviumcapital/clients/java/model/Swift.java
 src/main/java/tech/triviumcapital/clients/java/model/Transaction.java
 src/main/java/tech/triviumcapital/clients/java/model/TransactionStatus.java
@@ -121,6 +137,8 @@ src/main/java/tech/triviumcapital/clients/java/model/Transfer.java
 src/main/java/tech/triviumcapital/clients/java/model/TransferDetails.java
 src/main/java/tech/triviumcapital/clients/java/model/Unauthorized.java
 src/main/java/tech/triviumcapital/clients/java/model/User.java
+src/main/java/tech/triviumcapital/clients/java/model/UserActivated.java
+src/main/java/tech/triviumcapital/clients/java/model/UserCallbackEvent.java
 src/main/java/tech/triviumcapital/clients/java/model/UserDetails.java
 src/main/java/tech/triviumcapital/clients/java/model/UserStatus.java
 src/main/java/tech/triviumcapital/clients/java/model/UserTransaction.java

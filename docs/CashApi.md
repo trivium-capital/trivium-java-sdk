@@ -11,6 +11,7 @@ All URIs are relative to *http://localhost*
 | [**getApiV1CashTransactionsAccountid**](CashApi.md#getApiV1CashTransactionsAccountid) | **GET** /api/v1/cash/transactions/{accountId} |  |
 | [**getApiV1CashTransactionsRedemptionInfo**](CashApi.md#getApiV1CashTransactionsRedemptionInfo) | **GET** /api/v1/cash/transactions/redemption/info |  |
 | [**postApiV1CashAccount**](CashApi.md#postApiV1CashAccount) | **POST** /api/v1/cash/account |  |
+| [**postApiV1CashEvents**](CashApi.md#postApiV1CashEvents) | **POST** /api/v1/cash/events |  |
 | [**postApiV1CashRequestDepositAccountid**](CashApi.md#postApiV1CashRequestDepositAccountid) | **POST** /api/v1/cash/request/deposit/{accountId} |  |
 | [**postApiV1CashRequestRedemptionAccountid**](CashApi.md#postApiV1CashRequestRedemptionAccountid) | **POST** /api/v1/cash/request/redemption/{accountId} |  |
 
@@ -553,6 +554,82 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
+| **400** | Invalid value for: body |  -  |
+
+
+## postApiV1CashEvents
+
+> SubscribeCallbackResponse postApiV1CashEvents(subscribeCallbackRequest)
+
+
+
+### Example
+
+```java
+// Import classes:
+import tech.triviumcapital.clients.java.ApiClient;
+import tech.triviumcapital.clients.java.ApiException;
+import tech.triviumcapital.clients.java.Configuration;
+import tech.triviumcapital.clients.java.auth.*;
+import tech.triviumcapital.clients.java.models.*;
+import tech.triviumcapital.clients.java.api.CashApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost");
+        
+        // Configure API key authorization: apiKeyAuth
+        ApiKeyAuth apiKeyAuth = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuth");
+        apiKeyAuth.setApiKey("YOUR API KEY");
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //apiKeyAuth.setApiKeyPrefix("Token");
+
+        // Configure HTTP bearer authorization: httpAuth
+        HttpBearerAuth httpAuth = (HttpBearerAuth) defaultClient.getAuthentication("httpAuth");
+        httpAuth.setBearerToken("BEARER TOKEN");
+
+        CashApi apiInstance = new CashApi(defaultClient);
+        SubscribeCallbackRequest subscribeCallbackRequest = new SubscribeCallbackRequest(); // SubscribeCallbackRequest | 
+        try {
+            SubscribeCallbackResponse result = apiInstance.postApiV1CashEvents(subscribeCallbackRequest);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CashApi#postApiV1CashEvents");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **subscribeCallbackRequest** | [**SubscribeCallbackRequest**](SubscribeCallbackRequest.md)|  | |
+
+### Return type
+
+[**SubscribeCallbackResponse**](SubscribeCallbackResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth), [httpAuth](../README.md#httpAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json, text/plain
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** |  |  -  |
 | **400** | Invalid value for: body |  -  |
 
 
