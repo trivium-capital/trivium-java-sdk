@@ -32,7 +32,6 @@ gradle.*
 gradlew*
 settings.gradle
 src/test
-README.md
 pom.xml
 .github/
 .gitignore
