@@ -321,4 +321,6 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 | **400** | Invalid value for: path parameter userId, Invalid value for: body |  -  |
+| **401** | Invalid value for X-Api-Key or Authorization HTTP header |  -  |
+| **404** |  |  -  |
 

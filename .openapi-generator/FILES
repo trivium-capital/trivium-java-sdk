@@ -31,6 +31,7 @@ docs/InternationalTransfer.md
 docs/LocalTransfer.md
 docs/LockedFixedDeposit.md
 docs/MonthlyStatementMetadata.md
+docs/NotFound.md
 docs/OnboardingDocumentType.md
 docs/PaginationResultUserTransaction.md
 docs/PendingFixedDeposit.md
@@ -113,6 +114,7 @@ src/main/java/tech/triviumcapital/clients/java/model/InternationalTransfer.java
 src/main/java/tech/triviumcapital/clients/java/model/LocalTransfer.java
 src/main/java/tech/triviumcapital/clients/java/model/LockedFixedDeposit.java
 src/main/java/tech/triviumcapital/clients/java/model/MonthlyStatementMetadata.java
+src/main/java/tech/triviumcapital/clients/java/model/NotFound.java
 src/main/java/tech/triviumcapital/clients/java/model/OnboardingDocumentType.java
 src/main/java/tech/triviumcapital/clients/java/model/PaginationResultUserTransaction.java
 src/main/java/tech/triviumcapital/clients/java/model/PendingFixedDeposit.java
@@ -142,3 +144,4 @@ src/main/java/tech/triviumcapital/clients/java/model/UserCallbackEvent.java
 src/main/java/tech/triviumcapital/clients/java/model/UserDetails.java
 src/main/java/tech/triviumcapital/clients/java/model/UserStatus.java
 src/main/java/tech/triviumcapital/clients/java/model/UserTransaction.java
+src/test/java/tech/triviumcapital/clients/java/model/NotFoundTest.java

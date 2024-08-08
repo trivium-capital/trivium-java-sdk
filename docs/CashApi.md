@@ -251,7 +251,7 @@ public class Example {
 
 ## getApiV1CashRates
 
-> Rates getApiV1CashRates()
+> Rates getApiV1CashRates(userCountry)
 
 
 
@@ -284,8 +284,9 @@ public class Example {
         httpAuth.setBearerToken("BEARER TOKEN");
 
         CashApi apiInstance = new CashApi(defaultClient);
+        String userCountry = "userCountry_example"; // String | 
         try {
-            Rates result = apiInstance.getApiV1CashRates();
+            Rates result = apiInstance.getApiV1CashRates(userCountry);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CashApi#getApiV1CashRates");
@@ -300,7 +301,10 @@ public class Example {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userCountry** | **String**|  | [optional] |
 
 ### Return type
 
@@ -313,13 +317,14 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
+| **400** | Invalid value for: query parameter userCountry |  -  |
 
 
 ## getApiV1CashTransactionsAccountid

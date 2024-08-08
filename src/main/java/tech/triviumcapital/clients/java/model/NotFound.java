@@ -20,54 +20,53 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * DepositResponse
+ * NotFound
  */
 @JsonPropertyOrder({
-  DepositResponse.JSON_PROPERTY_TRANSACTION_ID
+  NotFound.JSON_PROPERTY_MESSAGE
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
-public class DepositResponse {
-  public static final String JSON_PROPERTY_TRANSACTION_ID = "transactionId";
-  private UUID transactionId;
+public class NotFound {
+  public static final String JSON_PROPERTY_MESSAGE = "message";
+  private String message;
 
-  public DepositResponse() {
+  public NotFound() {
   }
 
   /**
    * Constructor with all args parameters
    */
-  public DepositResponse(@JsonProperty(JSON_PROPERTY_TRANSACTION_ID) UUID transactionId) {
-    this.transactionId = transactionId;
+  public NotFound(@JsonProperty(JSON_PROPERTY_MESSAGE) String message) {
+    this.message = message;
   }
 
-  public DepositResponse transactionId(UUID transactionId) {
+  public NotFound message(String message) {
     
-    this.transactionId = transactionId;
+    this.message = message;
     return this;
   }
 
   /**
-   * Get transactionId
-   * @return transactionId
+   * Get message
+   * @return message
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
+  @JsonProperty(JSON_PROPERTY_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public UUID getTransactionId() {
-    return transactionId;
+  public String getMessage() {
+    return message;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
+  @JsonProperty(JSON_PROPERTY_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setTransactionId(UUID transactionId) {
-    this.transactionId = transactionId;
+  public void setMessage(String message) {
+    this.message = message;
   }
 
   @Override
@@ -78,20 +77,20 @@ public class DepositResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DepositResponse depositResponse = (DepositResponse) o;
-    return Objects.equals(this.transactionId, depositResponse.transactionId);
+    NotFound notFound = (NotFound) o;
+    return Objects.equals(this.message, notFound.message);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(transactionId);
+    return Objects.hash(message);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DepositResponse {\n");
-    sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
+    sb.append("class NotFound {\n");
+    sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -109,28 +108,28 @@ public class DepositResponse {
 
   public static class Builder {
 
-    private DepositResponse instance;
+    private NotFound instance;
 
     public Builder() {
-      this(new DepositResponse());
+      this(new NotFound());
     }
 
-    protected Builder(DepositResponse instance) {
+    protected Builder(NotFound instance) {
       this.instance = instance;
     }
 
-    public DepositResponse.Builder transactionId(UUID transactionId) {
-      this.instance.transactionId = transactionId;
+    public NotFound.Builder message(String message) {
+      this.instance.message = message;
       return this;
     }
 
 
     /**
-    * returns a built DepositResponse instance.
+    * returns a built NotFound instance.
     *
     * The builder is not reusable.
     */
-    public DepositResponse build() {
+    public NotFound build() {
       try {
         return this.instance;
       } finally {
@@ -148,16 +147,16 @@ public class DepositResponse {
   /**
   * Create a builder with no initialized field.
   */
-  public static DepositResponse.Builder builder() {
-    return new DepositResponse.Builder();
+  public static NotFound.Builder builder() {
+    return new NotFound.Builder();
   }
 
   /**
   * Create a builder with a shallow copy of this instance.
   */
-  public DepositResponse.Builder toBuilder() {
-    return new DepositResponse.Builder()
-      .transactionId(getTransactionId());
+  public NotFound.Builder toBuilder() {
+    return new NotFound.Builder()
+      .message(getMessage());
   }
 
 

@@ -2,7 +2,7 @@
 
 trivium-cash
 
-- API version: 0.2.1
+- API version: 0.2.2
 
 - Generator version: 7.7.0
 
@@ -42,7 +42,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>tech.triviumcapital.clients</groupId>
     <artifactId>trivium-java-sdk</artifactId>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -52,7 +52,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "tech.triviumcapital.clients:trivium-java-sdk:0.2.1"
+compile "tech.triviumcapital.clients:trivium-java-sdk:0.2.2"
 ```
 
 ### Others
@@ -65,7 +65,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/trivium-java-sdk-0.2.1.jar`
+- `target/trivium-java-sdk-0.2.2.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -166,6 +166,7 @@ All URIs are relative to *https://staging.api.triviumcapital.tech*
 - [LocalTransfer](docs/LocalTransfer.md)
 - [LockedFixedDeposit](docs/LockedFixedDeposit.md)
 - [MonthlyStatementMetadata](docs/MonthlyStatementMetadata.md)
+- [NotFound](docs/NotFound.md)
 - [OnboardingDocumentType](docs/OnboardingDocumentType.md)
 - [PaginationResultUserTransaction](docs/PaginationResultUserTransaction.md)
 - [PendingFixedDeposit](docs/PendingFixedDeposit.md)
