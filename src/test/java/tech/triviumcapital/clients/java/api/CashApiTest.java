@@ -91,7 +91,7 @@ public class CashApiTest {
      */
     @Test
     public void getApiV1CashRatesTest() throws ApiException {
-        Rates response = api.getApiV1CashRates();
+        Rates response = api.getApiV1CashRates(null);
 
         // TODO: test validations
     }
