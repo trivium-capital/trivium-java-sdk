@@ -2,7 +2,7 @@
 
 trivium-cash
 
-- API version: 0.2.2
+- API version: 0.2.3
 
 - Generator version: 7.7.0
 
@@ -42,7 +42,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>tech.triviumcapital.clients</groupId>
     <artifactId>trivium-java-sdk</artifactId>
-    <version>0.2.2</version>
+    <version>0.2.3</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -52,7 +52,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "tech.triviumcapital.clients:trivium-java-sdk:0.2.2"
+compile "tech.triviumcapital.clients:trivium-java-sdk:0.2.3"
 ```
 
 ### Others
@@ -65,7 +65,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/trivium-java-sdk-0.2.2.jar`
+- `target/trivium-java-sdk-0.2.3.jar`
 - `target/lib/*.jar`
 
 ## Getting Started

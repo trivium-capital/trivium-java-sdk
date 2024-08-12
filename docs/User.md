@@ -9,7 +9,6 @@
 |------------ | ------------- | ------------- | -------------|
 |**userId** | **UUID** |  |  |
 |**status** | **UserStatus** |  |  |
-|**accounts** | [**List&lt;Account&gt;**](Account.md) |  |  [optional] |
 
 
 

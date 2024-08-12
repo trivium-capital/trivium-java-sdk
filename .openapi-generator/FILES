@@ -144,4 +144,3 @@ src/main/java/tech/triviumcapital/clients/java/model/UserCallbackEvent.java
 src/main/java/tech/triviumcapital/clients/java/model/UserDetails.java
 src/main/java/tech/triviumcapital/clients/java/model/UserStatus.java
 src/main/java/tech/triviumcapital/clients/java/model/UserTransaction.java
-src/test/java/tech/triviumcapital/clients/java/model/NotFoundTest.java
