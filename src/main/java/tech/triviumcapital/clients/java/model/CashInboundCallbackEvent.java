@@ -24,13 +24,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.UUID;
-import tech.triviumcapital.clients.java.model.CashDeposit;
-import tech.triviumcapital.clients.java.model.CashRedemption;
-import tech.triviumcapital.clients.java.model.FixedDepositRedemption;
-import tech.triviumcapital.clients.java.model.FixedDepositTransfer;
-import tech.triviumcapital.clients.java.model.TransactionStatus;
+import tech.triviumcapital.clients.java.model.RedemptionSettled;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -41,13 +36,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 )
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
-  @JsonSubTypes.Type(value = CashDeposit.class, name = "CashDeposit"),
-  @JsonSubTypes.Type(value = CashRedemption.class, name = "CashRedemption"),
-  @JsonSubTypes.Type(value = FixedDepositRedemption.class, name = "FixedDepositRedemption"),
-  @JsonSubTypes.Type(value = FixedDepositTransfer.class, name = "FixedDepositTransfer"),
+  @JsonSubTypes.Type(value = RedemptionSettled.class, name = "RedemptionSettled"),
 })
 
-public interface UserTransaction  {
+public interface CashInboundCallbackEvent  {
     public String getType();
 }
 

@@ -20,43 +20,51 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.math.BigDecimal;
 import java.util.UUID;
-import tech.triviumcapital.clients.java.model.AccountType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * CreateAccountRequest
+ * Confirmation that redemption amount has arrived in redemption bank account
  */
 @JsonPropertyOrder({
-  CreateAccountRequest.JSON_PROPERTY_USER_ID,
-  CreateAccountRequest.JSON_PROPERTY_ACCOUNT_TYPE,
-  CreateAccountRequest.JSON_PROPERTY_CURRENCY_CODE
+  RedemptionSettled.JSON_PROPERTY_USER_ID,
+  RedemptionSettled.JSON_PROPERTY_AMOUNT,
+  RedemptionSettled.JSON_PROPERTY_CURRENCY_CODE,
+  RedemptionSettled.JSON_PROPERTY_TYPE
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
-public class CreateAccountRequest {
+public class RedemptionSettled implements CashInboundCallbackEvent {
   public static final String JSON_PROPERTY_USER_ID = "userId";
   private UUID userId;
 
-  public static final String JSON_PROPERTY_ACCOUNT_TYPE = "accountType";
-  private AccountType accountType;
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
+  private BigDecimal amount;
 
   public static final String JSON_PROPERTY_CURRENCY_CODE = "currencyCode";
   private String currencyCode;
 
-  public CreateAccountRequest() {
+  public static final String JSON_PROPERTY_TYPE = "type";
+  private String type;
+
+  public RedemptionSettled() {
   }
 
   /**
    * Constructor with all args parameters
    */
-  public CreateAccountRequest(@JsonProperty(JSON_PROPERTY_USER_ID) UUID userId, @JsonProperty(JSON_PROPERTY_ACCOUNT_TYPE) AccountType accountType, @JsonProperty(JSON_PROPERTY_CURRENCY_CODE) String currencyCode) {
+  public RedemptionSettled(@JsonProperty(JSON_PROPERTY_USER_ID) UUID userId, @JsonProperty(JSON_PROPERTY_AMOUNT) BigDecimal amount, @JsonProperty(JSON_PROPERTY_CURRENCY_CODE) String currencyCode, @JsonProperty(JSON_PROPERTY_TYPE) String type) {
     this.userId = userId;
-    this.accountType = accountType;
+    this.amount = amount;
     this.currencyCode = currencyCode;
+    this.type = type;
   }
 
-  public CreateAccountRequest userId(UUID userId) {
+  public RedemptionSettled userId(UUID userId) {
     
     this.userId = userId;
     return this;
@@ -81,32 +89,32 @@ public class CreateAccountRequest {
     this.userId = userId;
   }
 
-  public CreateAccountRequest accountType(AccountType accountType) {
+  public RedemptionSettled amount(BigDecimal amount) {
     
-    this.accountType = accountType;
+    this.amount = amount;
     return this;
   }
 
   /**
-   * Get accountType
-   * @return accountType
+   * Get amount
+   * @return amount
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_ACCOUNT_TYPE)
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public AccountType getAccountType() {
-    return accountType;
+  public BigDecimal getAmount() {
+    return amount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ACCOUNT_TYPE)
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setAccountType(AccountType accountType) {
-    this.accountType = accountType;
+  public void setAmount(BigDecimal amount) {
+    this.amount = amount;
   }
 
-  public CreateAccountRequest currencyCode(String currencyCode) {
+  public RedemptionSettled currencyCode(String currencyCode) {
     
     this.currencyCode = currencyCode;
     return this;
@@ -131,6 +139,31 @@ public class CreateAccountRequest {
     this.currencyCode = currencyCode;
   }
 
+  public RedemptionSettled type(String type) {
+    
+    this.type = type;
+    return this;
+  }
+
+  /**
+   * Get type
+   * @return type
+   */
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public String getType() {
+    return type;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setType(String type) {
+    this.type = type;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -139,24 +172,26 @@ public class CreateAccountRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreateAccountRequest createAccountRequest = (CreateAccountRequest) o;
-    return Objects.equals(this.userId, createAccountRequest.userId) &&
-        Objects.equals(this.accountType, createAccountRequest.accountType) &&
-        Objects.equals(this.currencyCode, createAccountRequest.currencyCode);
+    RedemptionSettled redemptionSettled = (RedemptionSettled) o;
+    return Objects.equals(this.userId, redemptionSettled.userId) &&
+        Objects.equals(this.amount, redemptionSettled.amount) &&
+        Objects.equals(this.currencyCode, redemptionSettled.currencyCode) &&
+        Objects.equals(this.type, redemptionSettled.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, accountType, currencyCode);
+    return Objects.hash(userId, amount, currencyCode, type);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CreateAccountRequest {\n");
+    sb.append("class RedemptionSettled {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    accountType: ").append(toIndentedString(accountType)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    currencyCode: ").append(toIndentedString(currencyCode)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -174,36 +209,40 @@ public class CreateAccountRequest {
 
   public static class Builder {
 
-    private CreateAccountRequest instance;
+    private RedemptionSettled instance;
 
     public Builder() {
-      this(new CreateAccountRequest());
+      this(new RedemptionSettled());
     }
 
-    protected Builder(CreateAccountRequest instance) {
+    protected Builder(RedemptionSettled instance) {
       this.instance = instance;
     }
 
-    public CreateAccountRequest.Builder userId(UUID userId) {
+    public RedemptionSettled.Builder userId(UUID userId) {
       this.instance.userId = userId;
       return this;
     }
-    public CreateAccountRequest.Builder accountType(AccountType accountType) {
-      this.instance.accountType = accountType;
+    public RedemptionSettled.Builder amount(BigDecimal amount) {
+      this.instance.amount = amount;
       return this;
     }
-    public CreateAccountRequest.Builder currencyCode(String currencyCode) {
+    public RedemptionSettled.Builder currencyCode(String currencyCode) {
       this.instance.currencyCode = currencyCode;
+      return this;
+    }
+    public RedemptionSettled.Builder type(String type) {
+      this.instance.type = type;
       return this;
     }
 
 
     /**
-    * returns a built CreateAccountRequest instance.
+    * returns a built RedemptionSettled instance.
     *
     * The builder is not reusable.
     */
-    public CreateAccountRequest build() {
+    public RedemptionSettled build() {
       try {
         return this.instance;
       } finally {
@@ -221,18 +260,19 @@ public class CreateAccountRequest {
   /**
   * Create a builder with no initialized field.
   */
-  public static CreateAccountRequest.Builder builder() {
-    return new CreateAccountRequest.Builder();
+  public static RedemptionSettled.Builder builder() {
+    return new RedemptionSettled.Builder();
   }
 
   /**
   * Create a builder with a shallow copy of this instance.
   */
-  public CreateAccountRequest.Builder toBuilder() {
-    return new CreateAccountRequest.Builder()
+  public RedemptionSettled.Builder toBuilder() {
+    return new RedemptionSettled.Builder()
       .userId(getUserId())
-      .accountType(getAccountType())
-      .currencyCode(getCurrencyCode());
+      .amount(getAmount())
+      .currencyCode(getCurrencyCode())
+      .type(getType());
   }
 
 

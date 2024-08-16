@@ -9,6 +9,7 @@ docs/CashAccountActivated.md
 docs/CashApi.md
 docs/CashCallbackEvent.md
 docs/CashDeposit.md
+docs/CashInboundCallbackEvent.md
 docs/CashRedemption.md
 docs/CompanyDetails.md
 docs/CreateAccountRequest.md
@@ -44,6 +45,7 @@ docs/Redemption.md
 docs/RedemptionInfo.md
 docs/RedemptionRequest.md
 docs/RedemptionResponse.md
+docs/RedemptionSettled.md
 docs/StatementApi.md
 docs/SubscribeCallbackRequest.md
 docs/SubscribeCallbackRequestWithSignature.md
@@ -93,6 +95,7 @@ src/main/java/tech/triviumcapital/clients/java/model/Balances.java
 src/main/java/tech/triviumcapital/clients/java/model/CashAccountActivated.java
 src/main/java/tech/triviumcapital/clients/java/model/CashCallbackEvent.java
 src/main/java/tech/triviumcapital/clients/java/model/CashDeposit.java
+src/main/java/tech/triviumcapital/clients/java/model/CashInboundCallbackEvent.java
 src/main/java/tech/triviumcapital/clients/java/model/CashRedemption.java
 src/main/java/tech/triviumcapital/clients/java/model/CompanyDetails.java
 src/main/java/tech/triviumcapital/clients/java/model/CreateAccountRequest.java
@@ -127,6 +130,7 @@ src/main/java/tech/triviumcapital/clients/java/model/Redemption.java
 src/main/java/tech/triviumcapital/clients/java/model/RedemptionInfo.java
 src/main/java/tech/triviumcapital/clients/java/model/RedemptionRequest.java
 src/main/java/tech/triviumcapital/clients/java/model/RedemptionResponse.java
+src/main/java/tech/triviumcapital/clients/java/model/RedemptionSettled.java
 src/main/java/tech/triviumcapital/clients/java/model/SubscribeCallbackRequest.java
 src/main/java/tech/triviumcapital/clients/java/model/SubscribeCallbackRequestWithSignature.java
 src/main/java/tech/triviumcapital/clients/java/model/SubscribeCallbackResponse.java
@@ -144,3 +148,5 @@ src/main/java/tech/triviumcapital/clients/java/model/UserCallbackEvent.java
 src/main/java/tech/triviumcapital/clients/java/model/UserDetails.java
 src/main/java/tech/triviumcapital/clients/java/model/UserStatus.java
 src/main/java/tech/triviumcapital/clients/java/model/UserTransaction.java
+src/test/java/tech/triviumcapital/clients/java/model/CashInboundCallbackEventTest.java
+src/test/java/tech/triviumcapital/clients/java/model/RedemptionSettledTest.java

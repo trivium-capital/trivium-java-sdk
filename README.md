@@ -2,7 +2,7 @@
 
 trivium-cash
 
-- API version: 0.2.3
+- API version: 0.2.4
 
 - Generator version: 7.7.0
 
@@ -42,7 +42,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>tech.triviumcapital.clients</groupId>
     <artifactId>trivium-java-sdk</artifactId>
-    <version>0.2.3</version>
+    <version>0.2.4</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -52,7 +52,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "tech.triviumcapital.clients:trivium-java-sdk:0.2.3"
+compile "tech.triviumcapital.clients:trivium-java-sdk:0.2.4"
 ```
 
 ### Others
@@ -65,7 +65,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/trivium-java-sdk-0.2.3.jar`
+- `target/trivium-java-sdk-0.2.4.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -124,6 +124,7 @@ All URIs are relative to *https://staging.api.triviumcapital.tech*
 | *CashApi*         | [**postApiV1CashEvents**](docs/CashApi.md#postApiV1CashEvents)                                                   | **POST** /api/v1/cash/events                         |             |
 | *CashApi*         | [**postApiV1CashRequestDepositAccountid**](docs/CashApi.md#postApiV1CashRequestDepositAccountid)                 | **POST** /api/v1/cash/request/deposit/{accountId}    |             |
 | *CashApi*         | [**postApiV1CashRequestRedemptionAccountid**](docs/CashApi.md#postApiV1CashRequestRedemptionAccountid)           | **POST** /api/v1/cash/request/redemption/{accountId} |             |
+| *CashApi*         | [**putApiV1CashCallback**](docs/CashApi.md#putApiV1CashCallback)                                                 | **PUT** /api/v1/cash/callback                        |             |
 | *FixedDepositApi* | [**getApiV1FixeddepositPlacementPlacementid**](docs/FixedDepositApi.md#getApiV1FixeddepositPlacementPlacementid) | **GET** /api/v1/fixedDeposit/placement/{placementId} |             |
 | *FixedDepositApi* | [**getApiV1FixeddepositUserUserid**](docs/FixedDepositApi.md#getApiV1FixeddepositUserUserid)                     | **GET** /api/v1/fixedDeposit/user/{userId}           |             |
 | *FixedDepositApi* | [**putApiV1FixeddepositPlacementPlacementid**](docs/FixedDepositApi.md#putApiV1FixeddepositPlacementPlacementid) | **PUT** /api/v1/fixedDeposit/placement/{placementId} |             |
@@ -145,6 +146,7 @@ All URIs are relative to *https://staging.api.triviumcapital.tech*
 - [CashAccountActivated](docs/CashAccountActivated.md)
 - [CashCallbackEvent](docs/CashCallbackEvent.md)
 - [CashDeposit](docs/CashDeposit.md)
+- [CashInboundCallbackEvent](docs/CashInboundCallbackEvent.md)
 - [CashRedemption](docs/CashRedemption.md)
 - [CompanyDetails](docs/CompanyDetails.md)
 - [CreateAccountRequest](docs/CreateAccountRequest.md)
@@ -179,6 +181,7 @@ All URIs are relative to *https://staging.api.triviumcapital.tech*
 - [RedemptionInfo](docs/RedemptionInfo.md)
 - [RedemptionRequest](docs/RedemptionRequest.md)
 - [RedemptionResponse](docs/RedemptionResponse.md)
+- [RedemptionSettled](docs/RedemptionSettled.md)
 - [SubscribeCallbackRequest](docs/SubscribeCallbackRequest.md)
 - [SubscribeCallbackRequestWithSignature](docs/SubscribeCallbackRequestWithSignature.md)
 - [SubscribeCallbackResponse](docs/SubscribeCallbackResponse.md)

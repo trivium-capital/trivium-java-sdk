@@ -14,6 +14,7 @@ All URIs are relative to *http://localhost*
 | [**postApiV1CashEvents**](CashApi.md#postApiV1CashEvents) | **POST** /api/v1/cash/events |  |
 | [**postApiV1CashRequestDepositAccountid**](CashApi.md#postApiV1CashRequestDepositAccountid) | **POST** /api/v1/cash/request/deposit/{accountId} |  |
 | [**postApiV1CashRequestRedemptionAccountid**](CashApi.md#postApiV1CashRequestRedemptionAccountid) | **POST** /api/v1/cash/request/redemption/{accountId} |  |
+| [**putApiV1CashCallback**](CashApi.md#putApiV1CashCallback) | **PUT** /api/v1/cash/callback |  |
 
 
 
@@ -802,4 +803,81 @@ public class Example {
 | **200** |  |  -  |
 | **400** |  |  -  |
 | **401** | Invalid value for X-Api-Key or Authorization HTTP header |  -  |
+
+
+## putApiV1CashCallback
+
+> putApiV1CashCallback(cashInboundCallbackEvent)
+
+
+
+Cash-related callback events to be sent to Trivium
+
+### Example
+
+```java
+// Import classes:
+import tech.triviumcapital.clients.java.ApiClient;
+import tech.triviumcapital.clients.java.ApiException;
+import tech.triviumcapital.clients.java.Configuration;
+import tech.triviumcapital.clients.java.auth.*;
+import tech.triviumcapital.clients.java.models.*;
+import tech.triviumcapital.clients.java.api.CashApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost");
+        
+        // Configure API key authorization: apiKeyAuth
+        ApiKeyAuth apiKeyAuth = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuth");
+        apiKeyAuth.setApiKey("YOUR API KEY");
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //apiKeyAuth.setApiKeyPrefix("Token");
+
+        // Configure HTTP bearer authorization: httpAuth
+        HttpBearerAuth httpAuth = (HttpBearerAuth) defaultClient.getAuthentication("httpAuth");
+        httpAuth.setBearerToken("BEARER TOKEN");
+
+        CashApi apiInstance = new CashApi(defaultClient);
+        CashInboundCallbackEvent cashInboundCallbackEvent = new CashInboundCallbackEvent(); // CashInboundCallbackEvent | 
+        try {
+            apiInstance.putApiV1CashCallback(cashInboundCallbackEvent);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CashApi#putApiV1CashCallback");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **cashInboundCallbackEvent** | [**CashInboundCallbackEvent**](CashInboundCallbackEvent.md)|  | |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth), [httpAuth](../README.md#httpAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: text/plain
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+| **400** | Invalid value for: body |  -  |
 
