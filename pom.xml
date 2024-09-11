@@ -5,7 +5,7 @@
     <artifactId>trivium-java-sdk</artifactId>
     <packaging>jar</packaging>
     <name>trivium-java-sdk</name>
-    <version>0.2.4</version>
+    <version>0.2.5</version>
     <url>https://github.com/trivium-capital/trivium-java-sdk</url>
     <description>Java SDK for Trivium API</description>
     <scm>
