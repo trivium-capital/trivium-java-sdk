@@ -28,87 +28,57 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * CashAccountActivated
+ * RedemptionReconciled
  */
 @JsonPropertyOrder({
-  CashAccountActivated.JSON_PROPERTY_ACCOUNT_ID,
-  CashAccountActivated.JSON_PROPERTY_USER_ID,
-  CashAccountActivated.JSON_PROPERTY_TYPE
+  RedemptionReconciled.JSON_PROPERTY_TRANSACTION_ID,
+  RedemptionReconciled.JSON_PROPERTY_TYPE
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.8.0")
-public class CashAccountActivated implements CashCallbackEvent {
-  public static final String JSON_PROPERTY_ACCOUNT_ID = "accountId";
-  private UUID accountId;
-
-  public static final String JSON_PROPERTY_USER_ID = "userId";
-  private UUID userId;
+public class RedemptionReconciled implements CashCallbackEvent {
+  public static final String JSON_PROPERTY_TRANSACTION_ID = "transactionId";
+  private UUID transactionId;
 
   public static final String JSON_PROPERTY_TYPE = "type";
   private String type;
 
-  public CashAccountActivated() {
+  public RedemptionReconciled() {
   }
 
   /**
    * Constructor with all args parameters
    */
-  public CashAccountActivated(@JsonProperty(JSON_PROPERTY_ACCOUNT_ID) UUID accountId, @JsonProperty(JSON_PROPERTY_USER_ID) UUID userId, @JsonProperty(JSON_PROPERTY_TYPE) String type) {
-    this.accountId = accountId;
-    this.userId = userId;
+  public RedemptionReconciled(@JsonProperty(JSON_PROPERTY_TRANSACTION_ID) UUID transactionId, @JsonProperty(JSON_PROPERTY_TYPE) String type) {
+    this.transactionId = transactionId;
     this.type = type;
   }
 
-  public CashAccountActivated accountId(UUID accountId) {
+  public RedemptionReconciled transactionId(UUID transactionId) {
     
-    this.accountId = accountId;
+    this.transactionId = transactionId;
     return this;
   }
 
   /**
-   * Get accountId
-   * @return accountId
+   * Get transactionId
+   * @return transactionId
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_ACCOUNT_ID)
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public UUID getAccountId() {
-    return accountId;
+  public UUID getTransactionId() {
+    return transactionId;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ACCOUNT_ID)
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setAccountId(UUID accountId) {
-    this.accountId = accountId;
+  public void setTransactionId(UUID transactionId) {
+    this.transactionId = transactionId;
   }
 
-  public CashAccountActivated userId(UUID userId) {
-    
-    this.userId = userId;
-    return this;
-  }
-
-  /**
-   * Get userId
-   * @return userId
-   */
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public UUID getUserId() {
-    return userId;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setUserId(UUID userId) {
-    this.userId = userId;
-  }
-
-  public CashAccountActivated type(String type) {
+  public RedemptionReconciled type(String type) {
     
     this.type = type;
     return this;
@@ -141,23 +111,21 @@ public class CashAccountActivated implements CashCallbackEvent {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CashAccountActivated cashAccountActivated = (CashAccountActivated) o;
-    return Objects.equals(this.accountId, cashAccountActivated.accountId) &&
-        Objects.equals(this.userId, cashAccountActivated.userId) &&
-        Objects.equals(this.type, cashAccountActivated.type);
+    RedemptionReconciled redemptionReconciled = (RedemptionReconciled) o;
+    return Objects.equals(this.transactionId, redemptionReconciled.transactionId) &&
+        Objects.equals(this.type, redemptionReconciled.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountId, userId, type);
+    return Objects.hash(transactionId, type);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CashAccountActivated {\n");
-    sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("class RedemptionReconciled {\n");
+    sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -176,36 +144,32 @@ public class CashAccountActivated implements CashCallbackEvent {
 
   public static class Builder {
 
-    private CashAccountActivated instance;
+    private RedemptionReconciled instance;
 
     public Builder() {
-      this(new CashAccountActivated());
+      this(new RedemptionReconciled());
     }
 
-    protected Builder(CashAccountActivated instance) {
+    protected Builder(RedemptionReconciled instance) {
       this.instance = instance;
     }
 
-    public CashAccountActivated.Builder accountId(UUID accountId) {
-      this.instance.accountId = accountId;
+    public RedemptionReconciled.Builder transactionId(UUID transactionId) {
+      this.instance.transactionId = transactionId;
       return this;
     }
-    public CashAccountActivated.Builder userId(UUID userId) {
-      this.instance.userId = userId;
-      return this;
-    }
-    public CashAccountActivated.Builder type(String type) {
+    public RedemptionReconciled.Builder type(String type) {
       this.instance.type = type;
       return this;
     }
 
 
     /**
-    * returns a built CashAccountActivated instance.
+    * returns a built RedemptionReconciled instance.
     *
     * The builder is not reusable.
     */
-    public CashAccountActivated build() {
+    public RedemptionReconciled build() {
       try {
         return this.instance;
       } finally {
@@ -223,17 +187,16 @@ public class CashAccountActivated implements CashCallbackEvent {
   /**
   * Create a builder with no initialized field.
   */
-  public static CashAccountActivated.Builder builder() {
-    return new CashAccountActivated.Builder();
+  public static RedemptionReconciled.Builder builder() {
+    return new RedemptionReconciled.Builder();
   }
 
   /**
   * Create a builder with a shallow copy of this instance.
   */
-  public CashAccountActivated.Builder toBuilder() {
-    return new CashAccountActivated.Builder()
-      .accountId(getAccountId())
-      .userId(getUserId())
+  public RedemptionReconciled.Builder toBuilder() {
+    return new RedemptionReconciled.Builder()
+      .transactionId(getTransactionId())
       .type(getType());
   }
 

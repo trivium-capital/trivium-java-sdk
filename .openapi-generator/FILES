@@ -43,6 +43,7 @@ docs/Rates.md
 docs/RedeemedFixedDeposit.md
 docs/Redemption.md
 docs/RedemptionInfo.md
+docs/RedemptionReconciled.md
 docs/RedemptionRequest.md
 docs/RedemptionResponse.md
 docs/RedemptionSettled.md
@@ -128,6 +129,7 @@ src/main/java/tech/triviumcapital/clients/java/model/Rates.java
 src/main/java/tech/triviumcapital/clients/java/model/RedeemedFixedDeposit.java
 src/main/java/tech/triviumcapital/clients/java/model/Redemption.java
 src/main/java/tech/triviumcapital/clients/java/model/RedemptionInfo.java
+src/main/java/tech/triviumcapital/clients/java/model/RedemptionReconciled.java
 src/main/java/tech/triviumcapital/clients/java/model/RedemptionRequest.java
 src/main/java/tech/triviumcapital/clients/java/model/RedemptionResponse.java
 src/main/java/tech/triviumcapital/clients/java/model/RedemptionSettled.java
@@ -148,5 +150,4 @@ src/main/java/tech/triviumcapital/clients/java/model/UserCallbackEvent.java
 src/main/java/tech/triviumcapital/clients/java/model/UserDetails.java
 src/main/java/tech/triviumcapital/clients/java/model/UserStatus.java
 src/main/java/tech/triviumcapital/clients/java/model/UserTransaction.java
-src/test/java/tech/triviumcapital/clients/java/model/CashInboundCallbackEventTest.java
-src/test/java/tech/triviumcapital/clients/java/model/RedemptionSettledTest.java
+src/test/java/tech/triviumcapital/clients/java/model/RedemptionReconciledTest.java

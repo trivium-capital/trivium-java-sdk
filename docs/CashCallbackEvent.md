@@ -6,5 +6,6 @@
 
 * CashAccountActivated
 * DepositSettled
+* RedemptionReconciled
 
 
