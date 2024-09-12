@@ -86,7 +86,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter userId |  -  |
+| **400** | Invalid value, Invalid value for: path parameter userId |  -  |
 
 
 ## postApiV1User
@@ -164,7 +164,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: body |  -  |
+| **400** | Invalid value, Invalid value for: body |  -  |
 
 
 ## postApiV1UserEvents
@@ -240,7 +240,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** |  |  -  |
-| **400** | Invalid value for: body |  -  |
+| **400** | Invalid value, Invalid value for: body |  -  |
 
 
 ## postApiV1UserUseridDocuments
@@ -320,7 +320,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter userId, Invalid value for: body |  -  |
+| **400** | Invalid value, Invalid value for: path parameter userId, Invalid value for: body |  -  |
 | **401** | Invalid value for X-Api-Key or Authorization HTTP header |  -  |
 | **404** |  |  -  |
 

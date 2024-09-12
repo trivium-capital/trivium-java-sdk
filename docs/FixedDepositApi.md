@@ -85,7 +85,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter placementId |  -  |
+| **400** | Invalid value, Invalid value for: path parameter placementId |  -  |
 
 
 ## getApiV1FixeddepositUserUserid
@@ -163,7 +163,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter userId |  -  |
+| **400** | Invalid value, Invalid value for: path parameter userId |  -  |
 
 
 ## putApiV1FixeddepositPlacementPlacementid
@@ -242,5 +242,5 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter placementId, Invalid value for: body |  -  |
+| **400** | Invalid value, Invalid value for: path parameter placementId, Invalid value for: body |  -  |
 

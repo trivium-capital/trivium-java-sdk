@@ -91,7 +91,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter accountId |  -  |
+| **400** | Invalid value, Invalid value for: path parameter accountId |  -  |
 
 
 ## getApiV1CashAccountUserUserid
@@ -169,7 +169,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter userId |  -  |
+| **400** | Invalid value, Invalid value for: path parameter userId |  -  |
 
 
 ## getApiV1CashBalanceUserid
@@ -247,7 +247,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter userId |  -  |
+| **400** | Invalid value, Invalid value for: path parameter userId |  -  |
 
 
 ## getApiV1CashRates
@@ -325,7 +325,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: query parameter userCountry |  -  |
+| **400** | Invalid value, Invalid value for: query parameter userCountry |  -  |
 
 
 ## getApiV1CashTransactionsAccountid
@@ -409,7 +409,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter accountId, Invalid value for: query parameter limit, Invalid value for: query parameter offset, Invalid value for: query parameter paginate |  -  |
+| **400** | Invalid value, Invalid value for: path parameter accountId, Invalid value for: query parameter limit, Invalid value for: query parameter offset, Invalid value for: query parameter paginate |  -  |
 
 
 ## getApiV1CashTransactionsRedemptionInfo
@@ -476,13 +476,14 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
+| **400** | Invalid value |  -  |
 
 
 ## postApiV1CashAccount
@@ -560,7 +561,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: body |  -  |
+| **400** | Invalid value, Invalid value for: body |  -  |
 
 
 ## postApiV1CashEvents
@@ -636,7 +637,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** |  |  -  |
-| **400** | Invalid value for: body |  -  |
+| **400** | Invalid value, Invalid value for: body |  -  |
 
 
 ## postApiV1CashRequestDepositAccountid
@@ -807,7 +808,7 @@ public class Example {
 
 ## putApiV1CashCallback
 
-> putApiV1CashCallback(cashInboundCallbackEvent)
+> putApiV1CashCallback(cashInboundCallbackEvent, xDeduplicationId)
 
 
 
@@ -841,8 +842,9 @@ public class Example {
 
         CashApi apiInstance = new CashApi(defaultClient);
         CashInboundCallbackEvent cashInboundCallbackEvent = new CashInboundCallbackEvent(); // CashInboundCallbackEvent | 
+        String xDeduplicationId = "xDeduplicationId_example"; // String | Unique value to be used for deduplication in case of network failure. Valid length is 1-64 characters.
         try {
-            apiInstance.putApiV1CashCallback(cashInboundCallbackEvent);
+            apiInstance.putApiV1CashCallback(cashInboundCallbackEvent, xDeduplicationId);
         } catch (ApiException e) {
             System.err.println("Exception when calling CashApi#putApiV1CashCallback");
             System.err.println("Status code: " + e.getCode());
@@ -860,6 +862,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **cashInboundCallbackEvent** | [**CashInboundCallbackEvent**](CashInboundCallbackEvent.md)|  | |
+| **xDeduplicationId** | **String**| Unique value to be used for deduplication in case of network failure. Valid length is 1-64 characters. | [optional] |
 
 ### Return type
 
@@ -879,5 +882,5 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: body |  -  |
+| **400** | Invalid value, Invalid value for: header X-Deduplication-Id, Invalid value for: body |  -  |
 

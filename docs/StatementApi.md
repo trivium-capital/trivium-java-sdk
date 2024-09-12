@@ -83,5 +83,5 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter userId |  -  |
+| **400** | Invalid value, Invalid value for: path parameter userId |  -  |
 

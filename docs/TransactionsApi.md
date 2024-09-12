@@ -89,5 +89,5 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: path parameter userId, Invalid value for: query parameter limit, Invalid value for: query parameter offset, Invalid value for: query parameter transactionId |  -  |
+| **400** | Invalid value, Invalid value for: path parameter userId, Invalid value for: query parameter limit, Invalid value for: query parameter offset, Invalid value for: query parameter transactionId |  -  |
 

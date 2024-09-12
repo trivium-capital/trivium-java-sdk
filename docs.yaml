@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: trivium-cash
-  version: 0.2.5
+  version: 0.2.6
 paths:
   /api/v1/user/{userId}:
     get:
@@ -28,7 +28,7 @@ paths:
                 userId: e63b255b-8ece-458b-ba26-d8e77188857a
                 status: ACTIVE
         '400':
-          description: 'Invalid value for: path parameter userId'
+          description: 'Invalid value, Invalid value for: path parameter userId'
           content:
             text/plain:
               schema:
@@ -75,7 +75,7 @@ paths:
                 userId: 952338f4-2681-4751-b8b1-82261906cd0a
                 status: PENDING
         '400':
-          description: 'Invalid value for: body'
+          description: 'Invalid value, Invalid value for: body'
           content:
             text/plain:
               schema:
@@ -117,8 +117,8 @@ paths:
                 id: b33124fe-8eb1-448b-8ddd-55f5bdd91174
                 uploadLink: https://example-bucket.s3.ap-southeast-1.amazonaws.com/provider/2024116677R/b33124fe-8eb1-448b-8ddd-55f5bdd91174/Company%20Registration.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240509T034631Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE/20240509/ap-southeast-1/s3/aws4_request&X-Amz-Expires=3600&X-Amz-Signature=37443067fb52e121265493e1a66a06caf089bfb1c0a15fa20c4530d3fbcfcefe
         '400':
-          description: 'Invalid value for: path parameter userId, Invalid value for:
-            body'
+          description: 'Invalid value, Invalid value for: path parameter userId, Invalid
+            value for: body'
           content:
             text/plain:
               schema:
@@ -167,7 +167,7 @@ paths:
                     type: SubscribeCallbackResponsePublicKey
                     publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqgdWNgGR+kR5sA7+oAXghDwXOPQAqo780XqRhP5R9kBid65I25pe+IIDT2bDlGs+uZtQnGdlg9GzWglpVs+gtIglalOVD96xv1cor+IWGRSRuBZolsq00LbWYuJBOJ1TW1M/u1+jNNjlML/WRvxpXbL3hMgp5Jk5FSq/Mj5BCc+I+SmPJBlIo/4+toJu4T41+Y29+h/C0L8WsUcUoP32cxQMCl/sRdFMGrRAFFIx1NtyXCmQDSUCtEwQ24o3oMnk3h0kTzmNNRPhk30Px4UaP/2NuECsuQIdC3Qm9OToHlrF2hDg073phthleZTZ/+4asb265l0cIBLv8x/AjIqU7wIDAQAB
         '400':
-          description: 'Invalid value for: body'
+          description: 'Invalid value, Invalid value for: body'
           content:
             text/plain:
               schema:
@@ -277,7 +277,7 @@ paths:
                     swiftCode: CHASUS33XXX
                     reference: C223456
         '400':
-          description: 'Invalid value for: path parameter accountId'
+          description: 'Invalid value, Invalid value for: path parameter accountId'
           content:
             text/plain:
               schema:
@@ -341,7 +341,7 @@ paths:
                     swiftCode: CHASUS33XXX
                     reference: C223456
         '400':
-          description: 'Invalid value for: path parameter userId'
+          description: 'Invalid value, Invalid value for: path parameter userId'
           content:
             text/plain:
               schema:
@@ -406,7 +406,7 @@ paths:
                     swiftCode: CHASUS33XXX
                     reference: C223456
         '400':
-          description: 'Invalid value for: body'
+          description: 'Invalid value, Invalid value for: body'
           content:
             text/plain:
               schema:
@@ -441,7 +441,7 @@ paths:
                     totalBalance: 23.01
                     availableBalance: 0.0
         '400':
-          description: 'Invalid value for: path parameter userId'
+          description: 'Invalid value, Invalid value for: path parameter userId'
           content:
             text/plain:
               schema:
@@ -493,20 +493,20 @@ paths:
                   accountId: 40117016-ac89-4690-9986-01102be1ac9b
                   quantity: 1007.33
                   currencyCode: SGD
-                  receivedAt: '2024-09-11T03:37:29.319197Z'
+                  receivedAt: '2024-09-12T12:13:54.317731847Z'
                   status: PENDING
                 - type: Redemption
                   accountId: 40117016-ac89-4690-9986-01102be1ac9b
                   quantity: 50.45
                   currencyCode: SGD
-                  receivedAt: '2024-09-11T03:37:29.320553Z'
+                  receivedAt: '2024-09-12T12:13:54.323930699Z'
                   status: PENDING
                 totalCount: 2
                 hasNextPage: false
         '400':
-          description: 'Invalid value for: path parameter accountId, Invalid value
-            for: query parameter limit, Invalid value for: query parameter offset,
-            Invalid value for: query parameter paginate'
+          description: 'Invalid value, Invalid value for: path parameter accountId,
+            Invalid value for: query parameter limit, Invalid value for: query parameter
+            offset, Invalid value for: query parameter paginate'
           content:
             text/plain:
               schema:
@@ -529,7 +529,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/RedemptionInfo'
               example:
-                redemptionDate: '2024-09-12'
+                redemptionDate: '2024-09-13'
+        '400':
+          description: Invalid value
+          content:
+            text/plain:
+              schema:
+                type: string
       security:
       - apiKeyAuth: []
         httpAuth: []
@@ -573,9 +579,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginationResult_UserTransaction'
         '400':
-          description: 'Invalid value for: path parameter userId, Invalid value for:
-            query parameter limit, Invalid value for: query parameter offset, Invalid
-            value for: query parameter transactionId'
+          description: 'Invalid value, Invalid value for: path parameter userId, Invalid
+            value for: query parameter limit, Invalid value for: query parameter offset,
+            Invalid value for: query parameter transactionId'
           content:
             text/plain:
               schema:
@@ -607,7 +613,7 @@ paths:
                 rates:
                   SGD: 0.019
         '400':
-          description: 'Invalid value for: query parameter userCountry'
+          description: 'Invalid value, Invalid value for: query parameter userCountry'
           content:
             text/plain:
               schema:
@@ -742,6 +748,14 @@ paths:
       - cash
       description: Cash-related callback events to be sent to Trivium
       operationId: putApiV1CashCallback
+      parameters:
+      - name: X-Deduplication-Id
+        in: header
+        description: Unique value to be used for deduplication in case of network
+          failure. Valid length is 1-64 characters.
+        required: false
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -759,7 +773,8 @@ paths:
         '200':
           description: ''
         '400':
-          description: 'Invalid value for: body'
+          description: 'Invalid value, Invalid value for: header X-Deduplication-Id,
+            Invalid value for: body'
           content:
             text/plain:
               schema:
@@ -796,7 +811,7 @@ paths:
                     type: SubscribeCallbackResponsePublicKey
                     publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqgdWNgGR+kR5sA7+oAXghDwXOPQAqo780XqRhP5R9kBid65I25pe+IIDT2bDlGs+uZtQnGdlg9GzWglpVs+gtIglalOVD96xv1cor+IWGRSRuBZolsq00LbWYuJBOJ1TW1M/u1+jNNjlML/WRvxpXbL3hMgp5Jk5FSq/Mj5BCc+I+SmPJBlIo/4+toJu4T41+Y29+h/C0L8WsUcUoP32cxQMCl/sRdFMGrRAFFIx1NtyXCmQDSUCtEwQ24o3oMnk3h0kTzmNNRPhk30Px4UaP/2NuECsuQIdC3Qm9OToHlrF2hDg073phthleZTZ/+4asb265l0cIBLv8x/AjIqU7wIDAQAB
         '400':
-          description: 'Invalid value for: body'
+          description: 'Invalid value, Invalid value for: body'
           content:
             text/plain:
               schema:
@@ -910,7 +925,7 @@ paths:
                     swiftCode: CHASUS33XXX
                     reference: C333456
         '400':
-          description: 'Invalid value for: path parameter placementId'
+          description: 'Invalid value, Invalid value for: path parameter placementId'
           content:
             text/plain:
               schema:
@@ -954,8 +969,8 @@ paths:
         '200':
           description: ''
         '400':
-          description: 'Invalid value for: path parameter placementId, Invalid value
-            for: body'
+          description: 'Invalid value, Invalid value for: path parameter placementId,
+            Invalid value for: body'
           content:
             text/plain:
               schema:
@@ -1013,7 +1028,7 @@ paths:
                     swiftCode: CHASUS33XXX
                     reference: C333456
         '400':
-          description: 'Invalid value for: path parameter userId'
+          description: 'Invalid value, Invalid value for: path parameter userId'
           content:
             text/plain:
               schema:
@@ -1049,7 +1064,7 @@ paths:
                 month: 5
                 downloadLink: https://example-bucket.s3.ap-southeast-1.amazonaws.com/e63b255b-8ece-458b-ba26-d8e77188857a/investment_bank/2024/05/statement.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240509T034631Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE/20240509/ap-southeast-1/s3/aws4_request&X-Amz-Expires=3600&X-Amz-Signature=37443067fb52e121265493e1a66a06caf089bfb1c0a15fa20c4530d3fbcfcefe
         '400':
-          description: 'Invalid value for: path parameter userId'
+          description: 'Invalid value, Invalid value for: path parameter userId'
           content:
             text/plain:
               schema:
